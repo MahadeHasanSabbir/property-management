@@ -3,16 +3,16 @@
 	if(isset($_SESSION['id'])){
 		//create connection with database
 		$connect = mysqli_connect("localhost","root","","property");
-		
 		//local variable
-		$pddata = $_POST['pdag'];
-		$nddata = $_POST['dag'];
-		$pkdata = $_POST['pkhotiyan'];
-		$nkdata = $_POST['khotiyan'];
-		$oodata = $_POST['oldowner'];
-		$nodata = $_POST['newowner'];
+		$pddata = str_replace(' ', '' , trim($_POST['pdag']));
+		$pddata = str_replace(' ', '' , trim($_POST['pdag']));
+		$nddata = str_replace(' ', '' , trim($_POST['dag']));
+		$pkdata = str_replace(' ', '' , trim($_POST['pkhotiyan']));
+		$nkdata = str_replace(' ', '' , trim($_POST['khotiyan']));
+		$oodata = trim($_POST['oldowner']);
+		$nodata = trim($_POST['newowner']);
 		$ddata = $_POST['dolil'];
-		$mdata = $_POST['mouja'];
+		$mdata = mysqli_real_escape_string($connect, trim($_POST['mouja']));
 		$sdata = $_POST['size'];
 		
 		if(isset($_GET['id'])){
@@ -35,7 +35,6 @@
 			}else if($id < 100){
 				$id = "0$id";
 			}
-			echo $id;
 		}
 
 		$table = "user"."$_SESSION[id]";
@@ -46,7 +45,7 @@
 		else{
 			//sql query for upload data to database
 			$sqlquery1 = "INSERT INTO $table (UID, pdagno, dagno, pkhatian, khatian, oldowner, newowner, dnum, mouja, size) VALUES ('$id', '$pddata', '$nddata', '$pkdata', '$nkdata', '$oodata', '$nodata', '$ddata', '$mdata', '$sdata');";
-			echo $sqlquery1;
+			
 			$sqlquery2 = "UPDATE user SET property = '$id' WHERE ID = '$_SESSION[id]'";
 		}
 		//method for upload data to database
@@ -56,7 +55,7 @@
 		}
 		//method to redirect this page to another page
 		mysqli_close($connect);
-		//header("location:http://localhost/Property-Management/profile/view.php");
+		header("location:http://localhost/Property-Management/profile/view.php");
 		exit;
 	}
 	else{

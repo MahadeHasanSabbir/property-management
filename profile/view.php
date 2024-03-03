@@ -3,7 +3,9 @@
 	if(isset($_SESSION['id'])){
 		//create connection with database
 		$connect = mysqli_connect("localhost","root","","property");
-
+		if(!$connect) {
+			die("Connection failed: " . mysqli_connect_error());
+		}
 		$table = "user"."$_SESSION[id]";
 
 		//sql query to find user information from database
@@ -18,8 +20,8 @@
 				<meta charset="UTF-8"/>
 				<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 				<title> All saved property information page </title>
-				<link rel="stylesheet" type="text/css" href="http://localhost/Property-Management/style/css/bootstrap.min.css" />
-				<link rel="stylesheet" type="text/css" href="http://localhost/Property-Management/style/css/bootstrap-theme.min.css" />
+				<link rel="stylesheet" type="text/css" href="../style/css/bootstrap.min.css" />
+				<link rel="stylesheet" type="text/css" href="../style/css/bootstrap-theme.min.css" />
 				<style>
 					body {padding-top:60px;background-color:darkseagreen;}
 					.center {display:grid;justify-content:center;}
@@ -32,9 +34,9 @@
 					<div class="form-group">
 						<label for="itemsPerPage">Items per page:</label>
 						<select class="form-control" id="itemsPerPage" onchange="changeItemsPerPage()">
-							<option value="10" <?php if(isset($_GET['itemPerPage']) && $_GET['itemPerPage'] == 10){ echo "selected";}?>>10</option>
-							<option value="15" <?php if(isset($_GET['itemPerPage']) && $_GET['itemPerPage'] == 15){ echo "selected";}?>>15</option>
-							<option value="20" <?php if(isset($_GET['itemPerPage']) && $_GET['itemPerPage'] == 20){ echo "selected";}?>>20</option>
+							<option value="10" <?php if(isset($_GET['itemsPerPage']) && $_GET['itemsPerPage'] == 10){ echo "selected";}?>>10</option>
+							<option value="15" <?php if(isset($_GET['itemsPerPage']) && $_GET['itemsPerPage'] == 15){ echo "selected";}?>>15</option>
+							<option value="20" <?php if(isset($_GET['itemsPerPage']) && $_GET['itemsPerPage'] == 20){ echo "selected";}?>>20</option>
 						</select>
 					</div>
 				<?php
@@ -82,7 +84,7 @@
 										echo "<td>" . $row['size'] . "</td>";
 										echo "<td class='text-center'>
 											<a href='store.php?key=$row[UID]' onclick='permit1()'>
-												<span class='glyphicon glyphicon-upload-alt'></span> edit
+												<span class='glyphicon glyphicon-edit'></span> edit
 											</a>
 										</td>
 										<td class='text-center'>
@@ -103,7 +105,7 @@
 									if ($i == $page) {
 										echo " class='active'";
 									}
-									echo '><a href="?page=' . $i . '">' . $i . '</a></li>';
+									echo '><a href="?page=' . $i . '&itemsPerPage='. $items_per_page .'">' . $i . '</a></li>';
 								}
 								echo "</ul></div>";
 							}
@@ -112,19 +114,20 @@
 					else{
 				?>
 						<div class='jumbotron'>
-							<h4 class='text-center'> You don't save any property yet! </h4> <br/> <br/>
-							<h5 class='text-center'> Save property for visit those. </h5>
+							<h4 class='text-center'> You don't save any property information yet! </h4> <br/> <br/>
+							<h5 class='text-center'> Save property information first for visit those. </h5>
 						</div>
 				<?php
+						//there is no data available, so update property count
 						$sql = "UPDATE user SET property = '000' WHERE user.ID = '$_SESSION[id]'";
 						mysqli_query($connect, $sql);
 					}
 				?>
 				</div>
 				<div id="content_footer"></div>
-				<script src="http://localhost/Property-Management/style/js/jquery.min.js"></script>
-				<script src="http://localhost/Property-Management/style/js/bootstrap.min.js"></script>
-				<script src="http://localhost/Property-Management/style/js/jscript.js"></script>
+				<script src="../style/js/jquery.min.js"></script>
+				<script src="../style/js/bootstrap.min.js"></script>
+				<script src="../style/js/jscript.js"></script>
 				<script>
 					function changeItemsPerPage() {
 						var selectedValue = document.getElementById("itemsPerPage").value;
@@ -132,12 +135,15 @@
 
 						// Check if URL already contains GET parameters
 						if (url.indexOf('?') > -1) {
-							// URL already has parameters, append new parameter
-							url += '&itemsPerPage=' + selectedValue;
-							/* if(url.indexOf('0') > -1 || url.indexOf('5') > -1){
-								url = url - (sizeof(url) - 2);
+							// URL already has parameters
+							if(url.indexOf('0') > -1 || url.indexOf('5') > -1){
+								// If '0' or '5' is present in the URL, remove last two characters
+								url = url.slice(0, -2);
 								url += selectedValue;
-							} */
+							} else {
+								// If '0' or '5' is not present, append new parameter
+								url += '&itemsPerPage=' + selectedValue;
+							}
 						} else {
 							// URL doesn't have parameters, add new parameter
 							url += '?itemsPerPage=' + selectedValue;

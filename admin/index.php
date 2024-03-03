@@ -11,8 +11,8 @@
 		<meta charset="UTF-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<title> Admin Log in page </title>
-		<link rel="stylesheet" type="text/css" href="http://localhost/Property-Management/style/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="http://localhost/Property-Management/style/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" type="text/css" href="../style/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="../style/css/bootstrap-theme.min.css">
 		<style>
 			body {padding-top:60px;}
 			.justify {display:grid;justify-content:center;text-align:center;width:70vw;}
@@ -63,22 +63,22 @@
 				</form>
 			</div>
 		</div>
-		<script src="http://localhost/Property-Management/style/js/jquery.min.js"></script>
-		<script src="http://localhost/Property-Management/style/js/bootstrap.min.js"></script>
+		<script src="../style/js/jquery.min.js"></script>
+		<script src="../style/js/bootstrap.min.js"></script>
 		<script>
 			function valid(){
 				var id = document.getElementById('id').value;
 				var pass = document.getElementById('pass').value;
 
-				var sampleid = /^[A-Za-z0-9]{4,10}$/i;
-				var samplepass = /^[A-Za-z0-9\@\#\$\%\&]{4,8}$/i;
+				var sampleID = /^[A-Za-z0-9]{4,10}$/i;
+				var samplePass = /^[A-Za-z0-9\@\#\$\%\&]{4,8}$/i;
 
-				if(!sampleid.test(id)){
-					alert("!Invalide ID");
+				if(!sampleID.test(id)){
+					alert("!Invalid ID");
 					return false;
 				}
-				else if(!samplepass.test(pass)){
-					alert("!Invalide Password");
+				else if(!samplePass.test(pass)){
+					alert("!Invalid Password");
 					return false;
 				}
 				return true;

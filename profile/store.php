@@ -20,8 +20,8 @@
 				<meta charset="UTF-8"/>
 				<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 				<title> Save property info | Property-Management </title>
-				<link rel="stylesheet" type="text/css" href="http://localhost/Aminship/style/css/bootstrap.min.css" />
-				<link rel="stylesheet" type="text/css" href="http://localhost/Aminship/style/css/bootstrap-theme.min.css" />
+				<link rel="stylesheet" type="text/css" href="../style/css/bootstrap.min.css" />
+				<link rel="stylesheet" type="text/css" href="../style/css/bootstrap-theme.min.css" />
 				<style>
 					body {padding-top:60px;background-color:darkseagreen;}
 				</style>
@@ -31,12 +31,12 @@
 				<div class="container-fluid">
 					<div class="page-header"> <h4> Save your property information </h4> </div>
 					<div class="jumbotron">
-						<form class="form-horizontal" <?php if(isset($row)){echo 'action="upload.php?id='.$row['UID'].'"';}else{ echo 'action="upload.php"';}?> name="saveinfo" onsubmit="return result()" method="post">
+						<form class="form-horizontal" <?php if(isset($row)){echo 'action="upload.php?id='.$row['UID'].'"';}else{ echo 'action="upload.php"';}?> name="saveinfo" onsubmit="return inputCheck()" method="post">
 							<h4> <u> Dag: </u> </h4>
 							<div class="form-group">
 								<label class="control-label col-sm-1">Puraton:</label>
 								<div class="col-sm-5">
-									<input type="number" min="0" name="pdag" class="form-control" id="pdag"<?php if(isset($row)){ echo "value = '$row[pdagno]'";}?> placeholder="Enter your puraton dag no" title="please add ',' after each number if you have more than one" required=""/>
+									<input type="text" min="0" name="pdag" class="form-control" id="pdag"<?php if(isset($row)){ echo "value = '$row[pdagno]'";}?> placeholder="Enter your puraton dag no" title="please add ',' after each number if you have more than one" required=""/>
 								</div>
 								<label class="control-label col-sm-1">Notun:</label>
 								<div class="col-sm-5">
@@ -47,22 +47,22 @@
 							<div class="form-group">
 								<label class="control-label col-sm-1">Puraton:</label>
 								<div class="col-sm-5">
-									<input type="number" min="0" name="pkhotiyan" class="form-control" id="pkhotiyan"<?php if(isset($row)){ echo "value = '$row[pkhatian]'";}?> placeholder="Enter your puraton khotiyan no" title="please add ',' after each number if you have more than one" required=""/>
+									<input type="text" min="0" name="pkhotiyan" class="form-control" id="pkhotiyan" <?php if(isset($row)){ echo "value = '$row[pkhatian]'";}?> placeholder="Enter your puraton khotiyan no" title="please add ',' after each number if you have more than one" required=""/>
 								</div>
 								<label class="control-label col-sm-1">Notun:</label>
 								<div class="col-sm-5">
-									<input type="number" min="0" name="khotiyan" class="form-control" id="khotiyan"<?php if(isset($row)){ echo "value = '$row[khatian]'";}?> placeholder="enter your notun khotiyan no" title="please add ',' after each number if you have more than one" required=""/>
+									<input type="text" min="0" name="khotiyan" class="form-control" id="khotiyan" <?php if(isset($row)){ echo "value = '$row[khatian]'";}?> placeholder="enter your notun khotiyan no" title="please add ',' after each number if you have more than one" required=""/>
 								</div>
 							</div>
 							<h4> <u> Owner: </u> </h4>
 							<div class="form-group">
 								<label class="control-label col-sm-1">Puraton:</label>
 								<div class="col-sm-5">
-									<input type="text" name="oldowner" class="form-control" id="pkhotiyan" <?php if(isset($row)){echo "value = '$row[oldowner]'";} ?> placeholder="Enter your old owner name" required=""/>
+									<input type="text" name="oldowner" class="form-control" id="oldowner" <?php if(isset($row)){echo "value = '$row[oldowner]'";} ?> placeholder="Enter your old owner name" required=""/>
 								</div>
 								<label class="control-label col-sm-1">Notun:</label>
 								<div class="col-sm-5">
-									<input type="text" name="newowner" class="form-control" id="khotiyan" <?php if(isset($row)){echo "value = '$row[newowner]'";} ?> placeholder="enter your new owner name" required=""/>
+									<input type="text" name="newowner" class="form-control" id="newowner" <?php if(isset($row)){echo "value = '$row[newowner]'";} ?> placeholder="enter your new owner name" required=""/>
 								</div>
 							</div>
 							<div class="form-group">
@@ -80,19 +80,59 @@
 								</div>
 							</div> <br/>
 							<button type="submit" value="submit" class="btn btn-md btn-default"> Save info </button>
+							<button type="reset" value="reset" class="btn btn-md btn-default"> Reset info </button>
 						</form>
 					</div>
 				</div>
 				<div class="sitefooter"></div>
-				<script src="http://localhost/Aminship/style/js/jquery.min.js"></script>
-				<script src="http://localhost/Aminship/style/js/bootstrap.min.js"></script>
-				<script src="http://localhost/Aminship/style/js/jscript.js"></script>
+				<script src="../style/js/jquery.min.js"></script>
+				<script src="../style/js/bootstrap.min.js"></script>
+				<script src="../style/js/jscript.js"></script>
 				<script>
-					function result(){
-						if(confirm("Are you sure to save information")){
-							return true;
-						}else{
+					function inputCheck(){
+						//Regular Expressions
+						var textPattern = /^[A-Za-z \.]{3,35}$/i;
+						var numberPattern = /^\s*\d{1,4}(?:\s*,\s*\d{1,4})*\s*$/;
+						
+						//Values from user
+						var pdagValue = document.getElementById('pdag').value;
+						var dagValue = document.getElementById('dag').value;
+						var pkhotiyanValue = document.getElementById('pkhotiyan').value;
+						var khotiyanValue = document.getElementById('khotiyan').value;
+						var oldOwnerValue = document.getElementById('oldowner').value;
+						var newOwnerValue = document.getElementById('newowner').value;
+						
+						//Validate the value
+						if(!numberPattern.test(pdagValue)){
+							alert("Incorrect value of puraton dag or formate error");
 							return false;
+						}
+						if(!numberPattern.test(dagValue)){
+							alert("Incorrect value of dag or formate error");
+							return false;
+						}
+						if(!numberPattern.test(pkhotiyanValue)){
+							alert("Incorrect value of puraton khotiyan or formate error");
+							return false;
+						}
+						if(!numberPattern.test(khotiyanValue)){
+							alert("Incorrect value of khotiyan or formate error");
+							return false;
+						}
+						if(!textPattern.test(oldOwnerValue)){
+							alert("Incorrect old owner name or formate error");
+							return false;
+						}
+						if(!textPattern.test(newOwnerValue)){
+							alert("Incorrect new owner name or formate error");
+							return false;
+						}
+						else{
+							if(confirm(" your information will store into database.\nClick ok to proceed")){
+								return true;
+							}else{
+								return false;
+							}
 						}
 					}
 				</script>
@@ -101,7 +141,7 @@
 <?php
 	}
 	else{
-		header("location:http://localhost/aminship/auth");
+		header("location:http://localhost/Property-Management/auth");
 		exit;
 	}
 ?>

@@ -19,8 +19,8 @@
 				<meta charset="UTF-8"/>
 				<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 				<title> Admin panel </title>
-				<link rel="stylesheet" type="text/css" href="http://localhost/Property-Management/style/css/bootstrap.min.css">
-				<link rel="stylesheet" type="text/css" href="http://localhost/Property-Management/style/css/bootstrap-theme.min.css">
+				<link rel="stylesheet" type="text/css" href="../style/css/bootstrap.min.css">
+				<link rel="stylesheet" type="text/css" href="../style/css/bootstrap-theme.min.css">
 				<style>
 					body {padding-top:60px;background-color:darkseagreen;}
 				</style>
@@ -32,22 +32,22 @@
 					<div class="jumbotron">
 						<form action="action.php" onsubmit="return namevalidate()" method="post" >
 							<label class="control-label"> Admin ID </label>:  <input type="text" name="name" class="form-control" id="name" value="<?php echo $row['ID'];?>" required=""/><br/>
-							<label class="control-label"> Password </label>:  <input type="password" name="password" class="form-control" id="pass"  placeholder="Give the old password" title="alphanumeric and @,#,$,%,& are allow" required=""/> <br/>
+							<label class="control-label"> Password </label>:  <input type="password" name="password" class="form-control" id="pass"  placeholder="Enter the old password" title="alphanumeric and @,#,$,%,& are allow" required=""/> <br/>
 							<button type="Submit" value="Update" class="btn btn-md btn-default"> Update </button> <br/>
 						</form>
 					</div>
 					<div class="jumbotron">
 						<form action="action.php" onsubmit="return passvalidate()" method="post" >
 							<label class="control-label"> New password </label>:  <input type="password" name="npassword" class="form-control" id="npass" placeholder="Create a new password" title="alphanumeric and @,#,$,%,& are allow" required=""/><br/>
-							<label class="control-label"> Old password </label>:  <input type="password" name="password" class="form-control" id="opass"  placeholder="Give the old password" title="alphanumeric and @,#,$,%,& are allow" required=""/> <br/>
+							<label class="control-label"> Old password </label>:  <input type="password" name="password" class="form-control" id="opass"  placeholder="Enter the old password" title="alphanumeric and @,#,$,%,& are allow" required=""/> <br/>
 							<button type="Submit" value="Update" class="btn btn-md btn-default"> Update </button> <br/>
 						</form>
 					</div>
 				</div>
 				<div id="footer"></div>
-				<script src="http://localhost/Property-Management/style/js/jquery.min.js"></script>
-				<script src="http://localhost/Property-Management/style/js/bootstrap.min.js"></script>
-				<script src="http://localhost/Property-Management/style/js/jscript.js"></script>
+				<script src="../style/js/jquery.min.js"></script>
+				<script src="../style/js/bootstrap.min.js"></script>
+				<script src="../style/js/jscript.js"></script>
 				<script>
 					function namevalidate(){
 						//Regular Expressions

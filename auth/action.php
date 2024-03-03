@@ -4,10 +4,10 @@
 		$connect = mysqli_connect("localhost","root","","property");
 		
 		//local variable
-		$name = $_POST['name'];
-		$number = $_POST['number'];
-		$email = $_POST['email'];
-		$password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+		$name = mysqli_real_escape_string($connect, $_POST['name']);
+		$number = mysqli_real_escape_string($connect, $_POST['number']);
+		$email = mysqli_real_escape_string($connect, $_POST['email']);
+		$password = password_hash(mysqli_real_escape_string($connect, $_POST['password']), PASSWORD_BCRYPT);
 		
 		//sql query to find user information from database
 		$sqlquery = "SELECT ID, users FROM admin";
@@ -57,9 +57,10 @@
 		mysqli_query($connect, $sqlquery2);
 		mysqli_query($connect, $sqlquery3);
 		
-		//mail to donor
-		mysqli_close($connect);
+		//mail to user
+		
 		//method to redirect this page to another page
+		mysqli_close($connect);
 		header("location:http://localhost/Property-Management/auth/log.php?id=$id");
 	}
 	else{

@@ -19,8 +19,8 @@
 				<meta charset="UTF-8"/>
 				<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 				<title> Admin panel </title>
-				<link rel="stylesheet" type="text/css" href="http://localhost/Property-Management/style/css/bootstrap.min.css">
-				<link rel="stylesheet" type="text/css" href="http://localhost/Property-Management/style/css/bootstrap-theme.min.css">
+				<link rel="stylesheet" type="text/css" href="../style/css/bootstrap.min.css">
+				<link rel="stylesheet" type="text/css" href="../style/css/bootstrap-theme.min.css">
 				<style>
 					body {padding-top:60px;background-color:darkseagreen;}
 				</style>
@@ -64,7 +64,13 @@
 									</div>
 									<div class="panel-body" >
 										<?php
-											$sql = "SELECT COUNT(ip) FROM visitors WHERE time LIKE '$today%'";
+											$day1 = $date -> format('Y-m');
+											$day2 = $date -> format('j');
+											if($day2 < 10){
+												$day2 = "0$day2";
+											}
+											$day = $day1."-".$day2;
+											$sql = "SELECT COUNT(ip) FROM visitors WHERE time LIKE '$day%'";
 											
 											$source = mysqli_query($connect, $sql);
 											$number = mysqli_fetch_array($source);
@@ -81,7 +87,7 @@
 									</div>
 									<div class="panel-body">
 										<?php
-											$sql = "SELECT COUNT(DISTINCT ip) FROM visitors WHERE time LIKE '$today%'";
+											$sql = "SELECT COUNT(DISTINCT ip) FROM visitors WHERE time LIKE '$day%'";
 
 											$source = mysqli_query($connect, $sql);
 											$number = mysqli_fetch_array($source);
@@ -169,9 +175,9 @@
 					</div>
 				</div>
 				<div class="footer"></div>
-				<script src="http://localhost/Property-Management/style/js/jquery.min.js"></script>
-				<script src="http://localhost/Property-Management/style/js/bootstrap.min.js"></script>
-				<script src="http://localhost/Property-Management/style/js/jscript.js"></script>
+				<script src="../style/js/jquery.min.js"></script>
+				<script src="../style/js/bootstrap.min.js"></script>
+				<script src="../style/js/jscript.js"></script>
 			</body>
 		</html>
 <?php

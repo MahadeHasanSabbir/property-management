@@ -1,17 +1,22 @@
-<?php
-	session_start();
-	if(isset($_SESSION['id'])){
-		header("location:http://localhost/Aminship/auth");
-		exit;
-	}
-	else{
-		header("location:http://localhost/Aminship");
-		exit;
-	}
-?>
 <!DOCTYPE html>
 <html>
 	<script>
-		alert("You don't have permision to access this folder!");
+		alert("You don't have permission to access this folder!");
 	</script>
+	<?php
+		session_start();
+		if(isset($_SESSION['id'])){
+			header("location:http://localhost/Property-Management/auth");
+			exit;
+			
+		}
+		else if(isset($_SESSION['aid'])){
+			header("location:http://localhost/Property-Management/admin");
+			exit;
+		}
+		else{
+			header("location:http://localhost/Property-Management");
+			exit;
+		}
+	?>
 </html>

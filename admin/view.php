@@ -18,8 +18,8 @@
 				<meta charset="UTF-8"/>
 				<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 				<title> All saved property information page </title>
-				<link rel="stylesheet" type="text/css" href="http://localhost/Property-Management/style/css/bootstrap.min.css" />
-				<link rel="stylesheet" type="text/css" href="http://localhost/Property-Management/style/css/bootstrap-theme.min.css" />
+				<link rel="stylesheet" type="text/css" href="../style/css/bootstrap.min.css" />
+				<link rel="stylesheet" type="text/css" href="../style/css/bootstrap-theme.min.css" />
 				<style>
 					body {padding-top:60px;background-color:darkseagreen;}
 					.center {display:grid;justify-content:center;}
@@ -36,9 +36,9 @@
 					<div class="form-group">
 						<label for="itemsPerPage">Items per page:</label>
 						<select class="form-control" id="itemsPerPage" onchange="changeItemsPerPage()">
-							<option value="10">10</option>
-							<option value="15">15</option>
-							<option value="20">20</option>
+							<option value="10" <?php if(isset($_GET['itemsPerPage']) && $_GET['itemsPerPage'] == 10){ echo "selected";}?>>10</option>
+							<option value="15" <?php if(isset($_GET['itemsPerPage']) && $_GET['itemsPerPage'] == 15){ echo "selected";}?>>15</option>
+							<option value="20" <?php if(isset($_GET['itemsPerPage']) && $_GET['itemsPerPage'] == 20){ echo "selected";}?>>20</option>
 						</select>
 					</div>
 					<?php
@@ -95,7 +95,7 @@
 									if ($i == $page) {
 										echo " class='active'";
 									}
-									echo '><a href="?id=' . $_GET['id'] . '&page=' . $i . '">' . $i . '</a></li>';
+									echo '><a href="?id=' . $_GET['id'] . '&page=' . $i . '&itemsPerPage='. $items_per_page .'">' . $i . '</a></li>';
 								}
 								echo "</ul></div>";
 							}
@@ -109,21 +109,22 @@
 					?>
 				</div>
 				<div id="content_footer"></div>
-				<script src="http://localhost/Property-Management/style/js/jquery.min.js"></script>
-				<script src="http://localhost/Property-Management/style/js/bootstrap.min.js"></script>
-				<script src="http://localhost/Property-Management/style/js/jscript.js"></script>
+				<script src="../style/js/jquery.min.js"></script>
+				<script src="../style/js/bootstrap.min.js"></script>
+				<script src="../style/js/jscript.js"></script>
 				<script>
 					function changeItemsPerPage() {
 						var selectedValue = document.getElementById("itemsPerPage").value;
 						var url = window.location.href;
-
-						// Check if URL already contains GET parameters
-						if (url.indexOf('?') > -1) {
-							// URL already has parameters, append new parameter
-							url += '&itemsPerPage=' + selectedValue;
+						var parameter = "itemsPerPage=";
+						// URL already has parameters
+						if(url.includes('itemsPerPage')){
+							// If itemsPerPage is present in the URL, change the value
+							var index = url.indexOf(parameter) + parameter.length;
+							url = url.substring(0, index) + selectedValue + url.substring(index + 2);
 						} else {
-							// URL doesn't have parameters, add new parameter
-							url += '?itemsPerPage=' + selectedValue;
+							// If itemsPerPage is not present, append new parameter
+							url += '&' + parameter + selectedValue;
 						}
 
 						// Redirect to the updated URL

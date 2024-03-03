@@ -12,8 +12,8 @@
 		<meta charset="UTF-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<title> Sign in page | Property-Management </title>
-		<link rel="stylesheet" type="text/css" href="http://localhost/Property-Management/style/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="http://localhost/Property-Management/style/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" type="text/css" href="../style/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="../style/css/bootstrap-theme.min.css">
 		<style>
 			body {padding-top:80px;background-color:darkseagreen;}
 			.justify {display:grid;justify-content:center;text-align:center;}
@@ -63,7 +63,7 @@
 						<?php
 						if(isset($_GET['id'])){
 							//sql query to find user information from database
-							$sqlquery = "SELECT * FROM user WHERE ID = '$_GET[id]'";
+							$sqlquery = "SELECT ID FROM user WHERE ID = '$_GET[id]'";
 
 							//take data from database
 							$data = mysqli_query($connect, $sqlquery);
@@ -91,7 +91,7 @@
 				<?php
 				if(!isset($_GET['id'])){
 				?>
-					<div class="text-center"> Don't have any account? <a class="btn btn-md btn-link" href="http://localhost/Property-Management/auth/register.php" > Register </a>
+					<div class="text-center"> Don't have any account? <a class="btn btn-md btn-link" href="./register.php" > Register </a>
 					<div class="text-center"> Forget your password? <a class="btn btn-md btn-link" href="mailto:info.pass@property-management.com" > mail us </a>
 					</div>
 				<?php
@@ -100,23 +100,23 @@
 			</div>
 		</div>
 		<div class="sitefooter"></div>
-		<script src="http://localhost/Property-Management/style/js/jquery.min.js"></script>
-		<script src="http://localhost/Property-Management/style/js/bootstrap.min.js"></script>
-		<script src="http://localhost/Property-Management/style/js/jscript.js"></script>
+		<script src="../style/js/jquery.min.js"></script>
+		<script src="../style/js/bootstrap.min.js"></script>
+		<script src="../style/js/jscript.js"></script>
 		<script>
 			function valid(){
 				var id = document.getElementById('id').value;
 				var pass = document.getElementById('pass').value;
 				
-				var sampleid = /^[0-9]{9}$/i;
-				var samplepass = /^[A-Za-z0-9\@\#\$\%\&]{4,9}$/i;
+				var sampleID = /^[0-9]{9}$/i;
+				var samplePass = /^[A-Za-z0-9\@\#\$\%\&]{4,9}$/i;
 				
-				if(!sampleid.test(id)){
-					alert("!Invalide ID");
+				if(!sampleID.test(id)){
+					alert("!Invalid ID");
 					return false;
 				}
-				else if(!samplepass.test(pass)){
-					alert("!Invalide Password");
+				else if(!samplePass.test(pass)){
+					alert("!Invalid Password");
 					return false;
 				}
 				return true;

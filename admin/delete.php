@@ -25,10 +25,15 @@
 		//delete todays visitor information
 		else if(isset($_GET['dd']) && $_GET['dd'] == 0){
 			$date = new DateTime();
-			$today = $date -> format('Y-m-j');
+			$day1 = $date -> format('Y-m');
+			$day2 = $date -> format('j');
+			if($day2 < 10){
+				$day2 = "0$day2";
+			}
+			$day = $day1."-".$day2;
 			
-			$dquery = "DELETE FROM visitors WHERE time LIKE '$today%'";
-			mysqli_query($connect, $dquery);
+			$query = "DELETE FROM visitors WHERE time LIKE '$day%'";
+			mysqli_query($connect, $query);
 			
 			mysqli_close($connect);
 			header("location:http://localhost/Property-Management/admin/adminprofile.php");
@@ -36,8 +41,8 @@
 		}
 		//delete all visitor information
 		else if(isset($_GET['dd']) && $_GET['dd'] == 1){
-			$dquery = "DELETE FROM visitors";
-			mysqli_query($connect, $dquery);
+			$query = "DELETE FROM visitors";
+			mysqli_query($connect, $query);
 			
 			mysqli_close($connect);
 			header("location:http://localhost/Property-Management/admin/adminprofile.php");
@@ -45,8 +50,8 @@
 		}
 		//delete massages from user
 		else if(isset($_GET['dm'])){
-			$dquery = "DELETE FROM massage WHERE massage.time = '$_GET[dm]'";
-			mysqli_query($connect, $dquery);
+			$query = "DELETE FROM massage WHERE massage.time = '$_GET[dm]'";
+			mysqli_query($connect, $query);
 			
 			mysqli_close($connect);
 			header("location:http://localhost/Property-Management/admin/massage.php");

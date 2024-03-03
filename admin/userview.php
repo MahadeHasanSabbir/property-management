@@ -19,8 +19,8 @@
 				<meta charset="UTF-8"/>
 				<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 				<title> <?php echo $row["name"];?>'s Profile | Property-Management </title>
-				<link rel="stylesheet" type="text/css" href="http://localhost/Property-Management/style/css/bootstrap.min.css" />
-				<link rel="stylesheet" type="text/css" href="http://localhost/Property-Management/style/css/bootstrap-theme.min.css" />
+				<link rel="stylesheet" type="text/css" href="../style/css/bootstrap.min.css" />
+				<link rel="stylesheet" type="text/css" href="../style/css/bootstrap-theme.min.css" />
 				<style>
 					body {padding-top:30px;background-color:darkseagreen;}
 				</style>
@@ -35,7 +35,7 @@
 						<a href='<?php echo "./delete.php?id=$id";?>' style="color:darkred;font-weight:bold;" class="btn btn-sm bg-danger" onclick="return apermit2()"> Delete ID </a>
 						<a href='<?php echo "./view.php?id=$id";?>' style="color:mediumblue;font-weight:bold;" class="btn btn-sm bg-info"> property info </a>
 					</div>
-					<div class="jumbotron">
+					<div class="jumbotron" style="line-height: 2;">
 						<?php
 							echo "<b class='col-sm-3 col-xs-3' style='padding-right:0px;'> User ID </b> <span class='col-sm-9'> : &nbsp", $row["ID"];
 							if($row['status'] == 1){
@@ -58,9 +58,9 @@
 						?>
 					</div>
 				</div>
-				<script src="http://localhost/Property-Management/style/js/jquery.min.js"></script>
-				<script src="http://localhost/Property-Management/style/js/bootstrap.min.js"></script>
-				<script src="http://localhost/Property-Management/style/js/jscript.js"></script>
+				<script src="../style/js/jquery.min.js"></script>
+				<script src="../style/js/bootstrap.min.js"></script>
+				<script src="../style/js/jscript.js"></script>
 			</body>
 		</html>
 <?php

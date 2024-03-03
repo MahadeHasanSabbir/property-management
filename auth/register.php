@@ -11,8 +11,8 @@
 		<meta charset="UTF-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<title> Sign up Form | Property-Management </title>
-		<link rel="stylesheet" type="text/css" href="http://localhost/Property-Management/style/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="http://localhost/Property-Management/style/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" type="text/css" href="../style/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="../style/css/bootstrap-theme.min.css">
 		<style>
 			body {padding-top:60px;background-color:darkseagreen;}
 		</style>
@@ -44,7 +44,7 @@
 					<div class="form-group">
 						<label class="control-label col-sm-2"> Password :</label>
 						<div class="col-sm-9">
-							<input type="password" name="password" class="form-control" id="pass" placeholder="Creat a password in 4 to 8 character" title="alphanumaric and @,#,$,%,& are allow" required=""/>
+							<input type="password" name="password" class="form-control" id="pass" placeholder="Create a password in 4 to 8 character" title="alphanumeric and @,#,$,%,& are allow" required=""/>
 						</div>
 					</div>
 					<br/>
@@ -54,9 +54,9 @@
 			</div>
 		</div>
 		<div id="content_footer"></div>
-		<script src="http://localhost/Property-Management/style/js/jquery.min.js"></script>
-		<script src="http://localhost/Property-Management/style/js/bootstrap.min.js"></script>
-		<script src="http://localhost/Property-Management/style/js/jscript.js"></script>
+		<script src="../style/js/jquery.min.js"></script>
+		<script src="../style/js/bootstrap.min.js"></script>
+		<script src="../style/js/jscript.js"></script>
 		<script>
 			function validate(){
 				//Regular Expressions
@@ -89,7 +89,7 @@
 					return false;
 				}
 				else{
-					if(confirm("Thank you, " + namevalue + ". Registrartion form fillup!\nRemember Your password for future use.\nClick ok to proceed")){
+					if(confirm("Thank you, " + namevalue + ". Registration form fill-up!\nRemember Your password for future use.\nClick ok to proceed")){
 						return true;
 					}else{
 						return false;

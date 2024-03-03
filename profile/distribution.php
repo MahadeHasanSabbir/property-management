@@ -8,8 +8,8 @@
 				<meta charset="UTF-8"/>
 				<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 				<title> Property distribute | Property-Management </title>
-				<link rel="stylesheet" type="text/css" href="http://localhost/Aminship/style/css/bootstrap.min.css">
-				<link rel="stylesheet" type="text/css" href="http://localhost/Aminship/style/css/bootstrap-theme.min.css">
+				<link rel="stylesheet" type="text/css" href="../style/css/bootstrap.min.css">
+				<link rel="stylesheet" type="text/css" href="../style/css/bootstrap-theme.min.css">
 				<style>
 					body {padding-top:60px;background-color:darkseagreen;}
 					#msg {display:none;}
@@ -40,9 +40,9 @@
 					</div>
 				</div>
 				<div class="sitefooter"></div>
-				<script src="http://localhost/Aminship/style/js/jquery.min.js"></script>
-				<script src="http://localhost/Aminship/style/js/bootstrap.min.js"></script>
-				<script src="http://localhost/Aminship/style/js/jscript.js"></script>
+				<script src="../style/js/jquery.min.js"></script>
+				<script src="../style/js/bootstrap.min.js"></script>
+				<script src="../style/js/jscript.js"></script>
 				<script>
 					function calculate(){
 						var kid1 = document.getElementById('k1').value * 1;
@@ -72,7 +72,7 @@
 <?php
 	}
 	else{
-		header("location:http://localhost/Aminship/auth");
+		header("location:http://localhost/Property-Management/auth");
 		exit;
 	}
 ?>

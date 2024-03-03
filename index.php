@@ -31,7 +31,7 @@
 			</div>
 			<!--features description-->
 			<div class="well" style="margin-top:05px;margin-bottom:05px;">
-				<p class="lead text-justify"> Here is the description of our features. We hope this will help you to manage your property properly and efficiently.</p>
+				<p class="lead text-center"> Here is the description of our features. We hope this will help you to manage your property properly and efficiently.</p>
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="panel panel-info">

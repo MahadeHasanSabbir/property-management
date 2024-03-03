@@ -6,11 +6,11 @@
 
 		//local variable
 		if(isset($_POST['name'])){
-			$id = $_POST['name'];
+			$id = mysqli_real_escape_string($connect, $_POST['name']);
 		}
-		$password = $_POST['password'];
+		$password = mysqli_real_escape_string($connect, $_POST['password']);
 		if(isset($_POST['npassword'])){
-			$npass = $_POST['npassword'];
+			$npass = mysqli_real_escape_string($connect, $_POST['npassword']);
 		}
 
 		// Prepare the SQL statement

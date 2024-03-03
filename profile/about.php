@@ -19,8 +19,8 @@
 				<meta charset="UTF-8"/>
 				<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 				<title> <?php echo $row["name"];?>'s Profile | Property-Management </title>
-				<link rel="stylesheet" type="text/css" href="http://localhost/Property-Management/style/css/bootstrap.min.css" />
-				<link rel="stylesheet" type="text/css" href="http://localhost/Property-Management/style/css/bootstrap-theme.min.css" />
+				<link rel="stylesheet" type="text/css" href="../style/css/bootstrap.min.css" />
+				<link rel="stylesheet" type="text/css" href="../style/css/bootstrap-theme.min.css" />
 				<style>
 					body {padding-top:30px;background-color:darkseagreen;}
 					.mb {margin-bottom:10px;padding-right:0px;padding-left:0px;}
@@ -39,7 +39,7 @@
 					if(password_verify($_SESSION['id'], $row['password'])){
 						echo "<div class='alert alert-danger' style='margin-bottom:10px;'>
 								<span class='glyphicon glyphicon-alert'></span>
-								Change your password. It is default password!
+								Change your password in edit profile. It is default password!
 								<button type='button' class='close' data-dismiss='alert' area-label='close'>
 									<span area-hidden='true'> &times; </span>
 								</button>
@@ -97,9 +97,9 @@
 						</div>
 					</div>
 				</div>
-				<script src="http://localhost/Property-Management/style/js/jquery.min.js"></script>
-				<script src="http://localhost/Property-Management/style/js/bootstrap.min.js"></script>
-				<script src="http://localhost/Property-Management/style/js/jscript.js"></script>
+				<script src="../style/js/jquery.min.js"></script>
+				<script src="../style/js/bootstrap.min.js"></script>
+				<script src="../style/js/jscript.js"></script>
 			</body>
 		</html>
 <?php

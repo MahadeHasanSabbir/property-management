@@ -20,7 +20,7 @@
 						<li onclick="giveinfo()" <?php if(basename($_SERVER['PHP_SELF']) == 'store.php'){echo 'class="active"';} ?>>
 							<a href="./store.php"> Store property </a>
 						</li>
-						<li onclick="return givealert()" <?php if(basename($_SERVER['PHP_SELF']) == 'search.php'){echo 'class="active"';} ?>>
+						<li <?php if(basename($_SERVER['PHP_SELF']) == 'search.php'){echo 'class="active"';} ?>>
 							<a href="./search.php"> Search property </a>
 						</li>
 						<li <?php if(basename($_SERVER['PHP_SELF']) == 'distribution.php'){echo 'class="active"';} ?>>
@@ -29,8 +29,8 @@
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li onclick="return permit()">
-							<a href="http://localhost/Property-Management/auth/logout.php">
-								<span class="glyphicon glyphicon-user"></span> Log out
+							<a href="../auth/logout.php">
+								<span class="glyphicon glyphicon-log-out"></span> Log out
 							</a>
 						</li>
 					</ul>
