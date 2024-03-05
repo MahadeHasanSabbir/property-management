@@ -1,5 +1,5 @@
 <?php
-if(isset($_SESSION['id'])) {
+if(isset($_SESSION['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $connect = mysqli_connect("localhost", "root", "", "property");
     if(!$connect) {
         die("Connection failed: " . mysqli_connect_error());
@@ -57,11 +57,11 @@ if(isset($_SESSION['id'])) {
             <thead>
                 <tr>
                     <th> NO </th>
-                    <th> Dolil NO </th>
-                    <th> Dag No </th>
-                    <th> puraton dag No </th>
-                    <th> Khotiyan No </th>
-                    <th> Puraton khotiyan No </th>
+                    <th> Deed NO </th>
+                    <th> Mark No </th>
+                    <th> Old mark No </th>
+                    <th> Ledger No </th>
+                    <th> Old ledger No </th>
                     <th> Old Owner </th>
                     <th> Area of land (cent) </th>
                 </tr>

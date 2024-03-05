@@ -63,9 +63,9 @@
 								<thead>
 									<tr>
 										<th> NO </th>
-										<th> Dolil NO </th>
-										<th> Dag No </th>
-										<th> Khotiyan No </th>
+										<th> Deed No </th>
+										<th> Mark No </th>
+										<th> Ledger No </th>
 										<th> Old Owner </th>
 										<th> Area of land (cent) </th>
 										<th class="col-md-2 text-center"> Edit </th>
@@ -84,12 +84,12 @@
 										echo "<td>" . $row['size'] . "</td>";
 										echo "<td class='text-center'>
 											<a href='store.php?key=$row[UID]' onclick='permit1()'>
-												<span class='glyphicon glyphicon-edit'></span> edit
+												<span class='glyphicon glyphicon-edit'></span> Edit
 											</a>
 										</td>
 										<td class='text-center'>
 											<a href='delete.php?key=$row[UID]' onclick='return permit3()'>
-												<span class='glyphicon glyphicon-trash'></span> Delete measurement
+												<span class='glyphicon glyphicon-trash'></span> Delete info
 											</a>
 										</td>
 									</tr>";

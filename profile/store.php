@@ -19,7 +19,7 @@
 			<head>
 				<meta charset="UTF-8"/>
 				<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-				<title> Save property info | Property-Management </title>
+				<title> Save property information | Property-Management </title>
 				<link rel="stylesheet" type="text/css" href="../style/css/bootstrap.min.css" />
 				<link rel="stylesheet" type="text/css" href="../style/css/bootstrap-theme.min.css" />
 				<style>
@@ -29,46 +29,46 @@
 			<body>
 				<?php include 'header.php'; ?>
 				<div class="container-fluid">
-					<div class="page-header"> <h4> Save your property information </h4> </div>
+					<div class="page-header text-center"> <h4> Save your property information </h4> </div>
 					<div class="jumbotron">
 						<form class="form-horizontal" <?php if(isset($row)){echo 'action="upload.php?id='.$row['UID'].'"';}else{ echo 'action="upload.php"';}?> name="saveinfo" onsubmit="return inputCheck()" method="post">
-							<h4> <u> Dag: </u> </h4>
+							<h4> <u> Mark no: </u> </h4>
 							<div class="form-group">
-								<label class="control-label col-sm-1">Puraton:</label>
+								<label class="control-label col-sm-1">Old:</label>
 								<div class="col-sm-5">
-									<input type="text" min="0" name="pdag" class="form-control" id="pdag"<?php if(isset($row)){ echo "value = '$row[pdagno]'";}?> placeholder="Enter your puraton dag no" title="please add ',' after each number if you have more than one" required=""/>
+									<input type="text" min="0" name="pdag" class="form-control" id="pdag"<?php if(isset($row)){ echo "value = '$row[pdagno]'";}?> placeholder="Enter your old mark no Example(1234,56...)" title="please add ',' after each number if you have more than one" required="" autofocus/>
 								</div>
-								<label class="control-label col-sm-1">Notun:</label>
+								<label class="control-label col-sm-1">New:</label>
 								<div class="col-sm-5">
-									<input type="text" min="0" name="dag" class="form-control" id="dag"<?php if(isset($row)){ echo "value = '$row[dagno]'";}?> placeholder="enter your notun dag no" title="please add ',' after each number if you have more than one" required=""/>
+									<input type="text" min="0" name="dag" class="form-control" id="dag"<?php if(isset($row)){ echo "value = '$row[dagno]'";}?> placeholder="enter your new mark no Example(1234,56...)" title="please add ',' after each number if you have more than one" required=""/>
 								</div>
 							</div>
-							<h4> <u> Khotiyan: </u> </h4>
+							<h4> <u> Ledger: </u> </h4>
 							<div class="form-group">
-								<label class="control-label col-sm-1">Puraton:</label>
+								<label class="control-label col-sm-1">Old:</label>
 								<div class="col-sm-5">
-									<input type="text" min="0" name="pkhotiyan" class="form-control" id="pkhotiyan" <?php if(isset($row)){ echo "value = '$row[pkhatian]'";}?> placeholder="Enter your puraton khotiyan no" title="please add ',' after each number if you have more than one" required=""/>
+									<input type="text" min="0" name="pkhotiyan" class="form-control" id="pkhotiyan" <?php if(isset($row)){ echo "value = '$row[pkhatian]'";}?> placeholder="Enter your old ledger no Example(1234,56...)" title="please add ',' after each number if you have more than one" required=""/>
 								</div>
-								<label class="control-label col-sm-1">Notun:</label>
+								<label class="control-label col-sm-1">New:</label>
 								<div class="col-sm-5">
-									<input type="text" min="0" name="khotiyan" class="form-control" id="khotiyan" <?php if(isset($row)){ echo "value = '$row[khatian]'";}?> placeholder="enter your notun khotiyan no" title="please add ',' after each number if you have more than one" required=""/>
+									<input type="text" min="0" name="khotiyan" class="form-control" id="khotiyan" <?php if(isset($row)){ echo "value = '$row[khatian]'";}?> placeholder="enter your new ledger no Example(1234,56...)" title="please add ',' after each number if you have more than one" required=""/>
 								</div>
 							</div>
 							<h4> <u> Owner: </u> </h4>
 							<div class="form-group">
-								<label class="control-label col-sm-1">Puraton:</label>
+								<label class="control-label col-sm-1">Old:</label>
 								<div class="col-sm-5">
 									<input type="text" name="oldowner" class="form-control" id="oldowner" <?php if(isset($row)){echo "value = '$row[oldowner]'";} ?> placeholder="Enter your old owner name" required=""/>
 								</div>
-								<label class="control-label col-sm-1">Notun:</label>
+								<label class="control-label col-sm-1">New:</label>
 								<div class="col-sm-5">
 									<input type="text" name="newowner" class="form-control" id="newowner" <?php if(isset($row)){echo "value = '$row[newowner]'";} ?> placeholder="enter your new owner name" required=""/>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="control-label col-sm-1">Dolil no:</label>
+								<label class="control-label col-sm-1">Deed no:</label>
 								<div class="col-sm-5">
-									<input type="number" min="0" name="dolil" class="form-control" id="dolil" <?php if(isset($row)){echo "value = '$row[dnum]'";} ?> placeholder="Enter your dolil no" required=""/>
+									<input type="number" min="0" name="dolil" class="form-control" id="dolil" <?php if(isset($row)){echo "value = '$row[dnum]'";} ?> placeholder="Enter your deed no" required=""/>
 								</div>
 								<label class="control-label col-sm-1">Mouja:</label>
 								<div class="col-sm-5">
@@ -76,7 +76,7 @@
 								</div>
 								<label class="control-label col-sm-1">Size:</label>
 								<div class="col-sm-5">
-									<input type="text" name="size" class="form-control" id="size" <?php if(isset($row)){echo "value = '$row[size]'";} ?> placeholder="enter your land size" required=""/>
+									<input type="number" min="0.0" name="size" class="form-control" id="size" <?php if(isset($row)){echo "value = '$row[size]'";} ?> placeholder="enter your land size in cent" required=""/>
 								</div>
 							</div> <br/>
 							<button type="submit" value="submit" class="btn btn-md btn-default"> Save info </button>
@@ -104,26 +104,32 @@
 						
 						//Validate the value
 						if(!numberPattern.test(pdagValue)){
-							alert("Incorrect value of puraton dag or formate error");
+							document.getElementById('pdag').style.color="red";
+							alert("Incorrect value of old mark or formate error");
 							return false;
 						}
 						if(!numberPattern.test(dagValue)){
-							alert("Incorrect value of dag or formate error");
+							document.getElementById('dag').style.color="red";
+							alert("Incorrect value of mark or formate error");
 							return false;
 						}
 						if(!numberPattern.test(pkhotiyanValue)){
-							alert("Incorrect value of puraton khotiyan or formate error");
+							document.getElementById('pkhotiyan').style.color="red";
+							alert("Incorrect value of old ledger or formate error");
 							return false;
 						}
 						if(!numberPattern.test(khotiyanValue)){
-							alert("Incorrect value of khotiyan or formate error");
+							document.getElementById('khotiyan').style.color="red";
+							alert("Incorrect value of ledger or formate error");
 							return false;
 						}
 						if(!textPattern.test(oldOwnerValue)){
+							document.getElementById('oldowner').style.color="red";
 							alert("Incorrect old owner name or formate error");
 							return false;
 						}
 						if(!textPattern.test(newOwnerValue)){
+							document.getElementById('newowner').style.color="red";
 							alert("Incorrect new owner name or formate error");
 							return false;
 						}

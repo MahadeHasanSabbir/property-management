@@ -39,12 +39,6 @@
 				<script src="../style/js/jquery.min.js"></script>
 				<script src="../style/js/bootstrap.min.js"></script>
 				<script src="../style/js/jscript.js"></script>
-				<script>
-					function show(){
-						document.getElementById("result").style="display:block;";
-						return false;
-					}
-				</script>
 			</body>
 		</html>
 <?php

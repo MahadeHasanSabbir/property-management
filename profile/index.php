@@ -43,7 +43,7 @@
 						</div>
 						<blockquote class="bg-warning" style="color:black;">
 							<p>
-								Before starting the measurement we want to clear one thing, we will help you to manage your property depending on your input. We can not help you to own or complete paper work along with government procedure, it will be done by you.
+								Before starting we want to clear one thing, we will help you to manage your property depending on your input. We can not help you to own property or complete paper work along with government procedure, it will be done by you.
 							</p>
 							<footer> From Property-Management </footer>
 						</blockquote>
@@ -55,7 +55,7 @@
 									property insertion process
 								</h4>
 								<p class="list-group-item-text text-justify">
-									Simply enter all the property data in the given form input field rest of the thing will be manage by us.
+									Simply enter all the property data in the given form input field as define there and rest of the thing will be manage by us.
 								</p>
 							</li>
 							<li class="list-group-item">
@@ -63,7 +63,7 @@
 									property search process
 								</h4>
 								<p class="list-group-item-text text-justify">
-									Simply enter the data you know and leave the unknown inout field. We will help you to find all the data related to your input.
+									Simply enter the data you know and leave the unknown input field blank. We will help you to find out all the data related to your input. You can find only the data saved by you.
 								</p>
 							</li>
 							<li class="list-group-item">

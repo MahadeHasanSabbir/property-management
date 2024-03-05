@@ -20,7 +20,7 @@
 	</head>
 	<body>
 		<div class="container justify">
-			<div class="page-header"> <h4> Admin log in form </h4> </div>
+			<div class="page-header"> <h4> Admin log in</h4> </div>
 			<div class="jumbotron">
 				<?php
 					if(isset($_SESSION['error'])){
@@ -58,8 +58,10 @@
 						<label class="control-label"> Password </label>
 						<input type="password" name="password" class="form-control" id="pass" placeholder="Enter admin password" title="alphanumeric and @,#,$,%,& are allow" required=""/>
 					</div>
-					<button class="btn btn-md btn-default" type="Submit" value="Login"> Login </button>
-					<button class="btn btn-md btn-default" type="Reset" value="Reset"> Reset </button> <br/>
+					<div class="form-group">
+						<button class="btn btn-md btn-default" type="Submit" value="Login"> Login </button>
+					</div>
+					
 				</form>
 			</div>
 		</div>

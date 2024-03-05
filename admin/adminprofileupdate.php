@@ -38,8 +38,12 @@
 					</div>
 					<div class="jumbotron">
 						<form action="action.php" onsubmit="return passvalidate()" method="post" >
-							<label class="control-label"> New password </label>:  <input type="password" name="npassword" class="form-control" id="npass" placeholder="Create a new password" title="alphanumeric and @,#,$,%,& are allow" required=""/><br/>
-							<label class="control-label"> Old password </label>:  <input type="password" name="password" class="form-control" id="opass"  placeholder="Enter the old password" title="alphanumeric and @,#,$,%,& are allow" required=""/> <br/>
+							<label class="control-label"> New password </label>: 
+							<input type="password" name="npassword" class="form-control" id="npass" placeholder="Create a new password" title="alphanumeric and @,#,$,%,& are allow" required=""/>
+							<br/>
+							<label class="control-label"> Old password </label>: 
+							<input type="password" name="password" class="form-control" id="opass"  placeholder="Enter the old password" title="alphanumeric and @,#,$,%,& are allow" required=""/>
+							<br/>
 							<button type="Submit" value="Update" class="btn btn-md btn-default"> Update </button> <br/>
 						</form>
 					</div>

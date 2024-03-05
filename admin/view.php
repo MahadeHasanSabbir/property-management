@@ -28,7 +28,7 @@
 			</head>
 			<body>
 				<?php include 'header.php'; ?>
-				<div class="container">
+				<div class="container-fluid">
 					<ul class="breadcrumb" style="margin-bottom:10px;">
 						<li> <a href='<?php echo "./userview.php?key=$_GET[id]";?>'> User profile </a> </li>
 						<li class="active"> Saved property </li>
@@ -65,9 +65,9 @@
 								<thead>
 									<tr>
 										<th> NO </th>
-										<th> Dolil NO </th>
-										<th> Dag No </th>
-										<th> Khotiyan No </th>
+										<th> Deed NO </th>
+										<th> Mark No </th>
+										<th> Ledger No </th>
 										<th> Old Owner </th>
 										<th> Area of land (cent) </th>
 									</tr>

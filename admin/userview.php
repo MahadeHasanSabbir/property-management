@@ -27,13 +27,21 @@
 			</head>
 			<body>
 				<?php include 'header.php'; ?>
-				<div class="container">
+				<div class="container-fluid">
 					<div class="page-header">
 						<h4 style="display:inline-block;padding-left:0px;" class="col-lg-8 col-md-7 col-sm-6 col-xs-12"> Information of <?php echo $row["name"];?> </h4>
-						<a href='<?php echo "./profileupdate.php?id=$id";?>' style="color:brown;font-weight:bold;" class="btn btn-sm bg-warning" onclick="return apermit1()"> Edit profile </a>
-						<a href='<?php echo "./userupdate.php?id=$id&pass=1";?>' style="color:darkred;font-weight:bold;" class="btn btn-sm bg-danger" onclick="return apermit1()"> Reset password </a>
-						<a href='<?php echo "./delete.php?id=$id";?>' style="color:darkred;font-weight:bold;" class="btn btn-sm bg-danger" onclick="return apermit2()"> Delete ID </a>
-						<a href='<?php echo "./view.php?id=$id";?>' style="color:mediumblue;font-weight:bold;" class="btn btn-sm bg-info"> property info </a>
+						<a href='<?php echo "./profileupdate.php?id=$id";?>' style="color:brown;font-weight:bold;" class="btn btn-sm bg-warning" onclick="return apermit1()">
+							Edit profile
+						</a>
+						<a href='<?php echo "./userupdate.php?id=$id&pass=1";?>' style="color:darkred;font-weight:bold;" class="btn btn-sm bg-danger" onclick="return apermit1()">
+							Reset password
+						</a>
+						<a href='<?php echo "./delete.php?id=$id";?>' style="color:darkred;font-weight:bold;" class="btn btn-sm bg-danger" onclick="return apermit2()">
+							Delete ID
+						</a>
+						<a href='<?php echo "./view.php?id=$id";?>' style="color:mediumblue;font-weight:bold;" class="btn btn-sm bg-info">
+							property info
+						</a>
 					</div>
 					<div class="jumbotron" style="line-height: 2;">
 						<?php

@@ -5,35 +5,35 @@ if(isset($_SESSION['id'])) {
 		<h4 class="text-center"> Search your property </h4>
 	</div>
     <div class="jumbotron">
-		<form class="form-horizontal" name="search" method="post" onsubmit="return show()">
+		<form class="form-horizontal" name="search" method="post">
 			<div class="form-group">
-				<label class="control-label col-sm-1"> Dag: </label>
+				<label class="control-label col-sm-1"> Mark: </label>
 				<div class="col-sm-5">
-					<input type="number" min="0" name="dag" class="form-control" id="dag" autofocus placeholder="Enter your dag no"/>
+					<input type="number" min="0" name="dag" class="form-control" id="dag" autofocus placeholder="Enter your mark no"/>
 				</div>
-				<div class="col-sm-5">
-					<select name="dagvalue" id="dagvalue">
-						<option value="0">Puraton</option>
-						<option value="1">Notun</option>
+				<div class="col-sm-2">
+					<select class="form-control" name="dagvalue" id="dagvalue">
+						<option value="0">Old</option>
+						<option value="1">New</option>
 					</select>
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-sm-1"> Khotiyan: </label>
+				<label class="control-label col-sm-1"> Ledger: </label>
 				<div class="col-sm-5">
-				    <input type="number" min="0" name="khotiyan" class="form-control" id="khotiyan" placeholder="Enter your khotiyan no"/>
+				    <input type="number" min="0" name="khotiyan" class="form-control" id="khotiyan" placeholder="Enter your ledger no"/>
 				</div>
-				<div class="col-sm-5">
-					<select name="khotiyanvalue" id="khotiyanvalue">
-						<option value="0">Puraton</option>
-						<option value="1">Notun</option>
+				<div class="col-sm-2">
+					<select class="form-control" name="khotiyanvalue" id="khotiyanvalue">
+						<option value="0">Old</option>
+						<option value="1">New</option>
 					</select>
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-sm-1">Dolil no:</label>
+				<label class="control-label col-sm-1">Deed:</label>
 				<div class="col-sm-5">
-					<input type="number" min="0" name="dolil" class="form-control" id="dolil" placeholder="Enter your dolil no"/>
+					<input type="number" min="0" name="dolil" class="form-control" id="dolil" placeholder="Enter your deed no"/>
 				</div>
 				<label class="control-label col-sm-1">Mouja:</label>
 				<div class="col-sm-5">

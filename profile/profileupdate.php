@@ -96,6 +96,7 @@
 						
 						//Validate the value
 						if(!namepattern.test(namevalue)){
+							/* document.getElementById('name').style.color="red"; */
 							alert("Incorrect name");
 							return false;
 						}

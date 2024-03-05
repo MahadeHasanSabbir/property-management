@@ -24,7 +24,7 @@
 			</head>
 			<body>
 				<?php include 'header.php'; ?>
-				<div class="container">
+				<div class="container-fluid">
 					<?php
 						if(mysqli_num_rows($data) > 0){
 					?>
@@ -36,8 +36,9 @@
 											<th class="col-md-2"> User ID </th>
 											<th> Name </th>
 											<th class="col-md-2"> Number </th>
-											<th class="col-md-2"> Number of property </th>
-											<th class="col-md-2"> View profile </th>
+											<th class="col-md-2"> Number of saved property </th>
+											<th class="col-md-2"> Status </th>
+											<th class="col-md-2 text-center"> View profile </th>
 										</tr>
 									</thead>
 									<tbody>
@@ -47,8 +48,14 @@
 												<td> $row[ID] </td>
 												<td> $row[name] </td>
 												<td> $row[phone] </td>
-												<td> $row[property] </td>
-												<td>
+												<td> $row[property] </td>";
+											if($row['status'] == 0){
+												echo "<td> Inactive </td>";
+											}
+											else{
+												echo "<td> Active </td>";
+											}
+										echo"<td class='text-center'>
 													<a href='userview.php?key=$row[ID]'> <span class='glyphicon glyphicon-user'></span> Profile </a>
 												</td>
 											</tr>";
