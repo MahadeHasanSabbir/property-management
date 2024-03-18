@@ -6,11 +6,11 @@
 
 		//delete user data
 		if(isset($_GET['id'])){
-
-			$table = "user"."$_GET[id]";
+			$id = mysqli_real_escape_string($connect, $_GET['id']);
+			$table = "user"."$id";
 
 			//sql query
-			$sql1 = "DELETE FROM user WHERE ID = '$_GET[id]'";
+			$sql1 = "DELETE FROM user WHERE ID = '$id'";
 			$sql2 = "DROP TABLE $table";
 
 			//take data from database
@@ -19,7 +19,7 @@
 
 			//method to redirect this page to another page
 			mysqli_close($connect);
-			header("location:http://localhost/Property-Management/admin/users.php");
+			header("location:./users.php");
 			exit;
 		}
 		//delete todays visitor information
@@ -36,7 +36,7 @@
 			mysqli_query($connect, $query);
 			
 			mysqli_close($connect);
-			header("location:http://localhost/Property-Management/admin/adminprofile.php");
+			header("location:./adminprofile.php");
 			exit;
 		}
 		//delete all visitor information
@@ -45,28 +45,29 @@
 			mysqli_query($connect, $query);
 			
 			mysqli_close($connect);
-			header("location:http://localhost/Property-Management/admin/adminprofile.php");
+			header("location:./adminprofile.php");
 			exit;
 		}
 		//delete massages from user
 		else if(isset($_GET['dm'])){
-			$query = "DELETE FROM massage WHERE massage.time = '$_GET[dm]'";
+			$dm = mysqli_real_escape_string($connect, $_GET['dm']);
+			$query = "DELETE FROM massage WHERE massage.time = '$dm'";
 			mysqli_query($connect, $query);
 			
 			mysqli_close($connect);
-			header("location:http://localhost/Property-Management/admin/massage.php");
+			header("location:./massage.php");
 			exit;
 		}
 		//redirect if there has no job
 		else{
 			mysqli_close($connect);
-			header("location:http://localhost/Property-Management/admin/users.php");
+			header("location:./users.php");
 			exit;
 		}
 	}
 	else{
 		$_SESSION['error'] = 'Request failed';
-		header("location:http://localhost/Property-Management/admin/");
+		header("location:./");
 		exit;
 	}
 ?>

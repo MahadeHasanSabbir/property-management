@@ -47,7 +47,7 @@ if(isset($_SESSION['id'])) {
 <?php
 }
 else {
-    header("location:http://localhost/Property-Management/auth");
+    header("location:../auth");
     exit;
 }
 ?>

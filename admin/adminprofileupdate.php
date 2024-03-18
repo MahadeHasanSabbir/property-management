@@ -55,19 +55,19 @@
 				<script>
 					function namevalidate(){
 						//Regular Expressions
-						var namepattern = /^[A-Za-z0-9]{4,10}$/i;
-						var passwordpattern = /^[A-Za-z0-9\@\#\$\%\&]{4,8}$/i;
+						var namePattern = /^[A-Za-z0-9]{4,10}$/i;
+						var passwordPattern = /^[A-Za-z0-9\@\#\$\%\&]{4,8}$/i;
 						
 						//Values from user
-						var namevalue = document.getElementById('name').value;
-						var passwordvalue = document.getElementById('pass').value;
+						var nameValue = document.getElementById('name').value;
+						var passwordValue = document.getElementById('pass').value;
 						
 						//Validate the value
-						if(!namepattern.test(namevalue)){
+						if(!namePattern.test(nameValue)){
 							alert("Incorrect ID! ID can be alphanumeric only.");
 							return false;
 						}
-						else if(!passwordpattern.test(passwordvalue)){
+						else if(!passwordPattern.test(passwordValue)){
 							alert("Incorrect old password! Please follow the pattern of the password.");
 							return false;
 						}
@@ -80,18 +80,18 @@
 						}
 					function passvalidate(){
 						//Regular Expressions
-						var passwordpattern = /^[A-Za-z0-9\@\#\$\%\&]{4,8}$/i;
+						var passwordPattern = /^[A-Za-z0-9\@\#\$\%\&]{4,8}$/i;
 						
 						//Values from user
-						var passwordvalue = document.getElementById('opass').value;
-						var npasswordvalue = document.getElementById('npass').value;
+						var passwordValue = document.getElementById('opass').value;
+						var nPasswordValue = document.getElementById('npass').value;
 						
 						//Validate the value
-						if(!passwordpattern.test(passwordvalue)){
+						if(!passwordPattern.test(passwordValue)){
 							alert("Incorrect password! Please follow the pattern of the password.");
 							return false;
 						}
-						else if(!passwordpattern.test(npasswordvalue)){
+						else if(!passwordPattern.test(nPasswordValue)){
 							alert("Incorrect password! Please follow the pattern of the password.");
 							return false;
 						}
@@ -110,7 +110,7 @@
 	}
 	else{
 		$_SESSION['error'] = 'Request failed';
-		header("location:http://localhost/Property-Management/admin/");
+		header("location:./");
 		exit;
 	}
 ?>

@@ -19,11 +19,11 @@
 
 		//redirect to login page
 		mysqli_close($connect);
-		header("location:http://localhost/Property-Management/auth/log.php");
+		header("location:./log.php");
 		exit;
 	}
 	else{
-		header("location:http://localhost/Property-Management/auth");
+		header("location:./");
 		exit;
 	}
 ?>

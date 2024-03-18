@@ -16,7 +16,7 @@
 		$sdata = $_POST['size'];
 		
 		if(isset($_GET['id'])){
-			$id = $_GET['id'];
+			$id = mysqli_real_escape_string($connect, $_GET['id']);
 		}
 		else{
 			//sql query to find user information from database
@@ -55,11 +55,11 @@
 		}
 		//method to redirect this page to another page
 		mysqli_close($connect);
-		header("location:http://localhost/Property-Management/profile/view.php");
+		header("location:./view.php");
 		exit;
 	}
 	else{
-		header("location:http://localhost/Property-Management/auth");
+		header("location:../auth");
 		exit;
 	}
 ?>

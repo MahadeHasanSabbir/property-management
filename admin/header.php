@@ -23,7 +23,7 @@
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li onclick="return permit()">
-                            <a href="http://localhost/Property-Management/admin/logout.php">
+                            <a href="./logout.php">
 								<span class="glyphicon glyphicon-log-out"></span> Log out
 							</a>
                         </li>

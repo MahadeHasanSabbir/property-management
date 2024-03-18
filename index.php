@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	if(isset($_SESSION['id']) or isset($_SESSION['aid'])){
-		header("location:http://localhost/Property-Management/auth");
+		header("location:./auth");
 		exit;
 	}
 	//create connection with database

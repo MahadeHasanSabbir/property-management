@@ -185,7 +185,7 @@
 	}
 	else{
 		$_SESSION['error'] = 'Request failed';
-		header("location:http://localhost/Property-Management/admin/");
+		header("location:./");
 		exit;
 	}
 ?>

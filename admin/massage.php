@@ -9,9 +9,6 @@
 
 		//take data from database
 		$data = mysqli_query($connect, $sql);
-
-		//convert 2D array to 1D array
-		$row = mysqli_fetch_assoc($data);
 ?>
 		<!DOCTYPE html>
 		<html>
@@ -30,7 +27,8 @@
 				<div class="container">
 					<div class="jumbotron" style="display:flow-root;">
                     <?php    
-                    if($row){
+                    if(mysqli_num_rows($data) > 0){
+						$row = mysqli_fetch_assoc($data);
                         do{
                     ?>
 						<div class="col-sm-4 text-center">
@@ -70,7 +68,7 @@
 	}
 	else{
 		$_SESSION['error'] = 'Request failed';
-		header("location:http://localhost/Property-Management/admin/");
+		header("location:./");
 		exit;
 	}
 ?>

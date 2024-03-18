@@ -3,8 +3,9 @@
 	if(isset($_SESSION['aid']) && isset($_GET['key'])){
 		//create connection with database
 		$connect = mysqli_connect("localhost","root","","property");
-		$id = $_GET['key'];
+
 		//sql query to find user information from database
+		$id = mysqli_real_escape_string($connect, $_GET['key']);
 		$sqlquery = "SELECT * FROM user WHERE ID = '$id'";
 
 		//take data from database
@@ -76,7 +77,7 @@
 	}
 	else{
 		$_SESSION['error'] = 'Request failed';
-		header("location:http://localhost/Property-Management/admin/");
+		header("location:./");
 		exit;
 	}
 ?>

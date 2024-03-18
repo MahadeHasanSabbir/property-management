@@ -29,26 +29,26 @@
 				$query = "UPDATE user SET status = '1' WHERE user.ID = '$_SESSION[id]';";
 				mysqli_query($con, $query);
 				mysqli_close($con);
-				header('location: http://localhost/Property-Management/profile/');
+				header('location:../profile/');
 				exit;
 			} else {
 				// Login failed - incorrect password
 				$_SESSION['error'] = 'Incorrect password';
 				mysqli_close($con);
-				header('location: http://localhost/Property-Management/auth/log.php');
+				header('location:./log.php');
 				exit;
 			}
 		} else {
 			// Login failed - user not found
 			$_SESSION['error'] = 'User not found';
 			mysqli_close($con);
-			header('location: http://localhost/Property-Management/auth/log.php');
+			header('location:./log.php');
 			exit;
 		}
 	} else {
 		// Login failed - request failed
 		mysqli_close($con);
-		header('location: http://localhost/Property-Management/auth');
+		header('location:./');
 		exit;
 	}
 ?>

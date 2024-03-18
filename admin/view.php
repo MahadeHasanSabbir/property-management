@@ -4,7 +4,8 @@
 		//create connection with database
 		$connect = mysqli_connect("localhost","root","","property");
 
-		$table = "user"."$_GET[id]";
+		$id = mysqli_real_escape_string($connect, $_GET['id']);
+		$table = "user"."$id";
 
 		//sql query to find user information from database
 		$sqlquery = "SELECT * FROM $table";
@@ -30,7 +31,7 @@
 				<?php include 'header.php'; ?>
 				<div class="container-fluid">
 					<ul class="breadcrumb" style="margin-bottom:10px;">
-						<li> <a href='<?php echo "./userview.php?key=$_GET[id]";?>'> User profile </a> </li>
+						<li> <a href='<?php echo "./userview.php?key=$id";?>'> User profile </a> </li>
 						<li class="active"> Saved property </li>
 					</ul>
 					<div class="form-group">
@@ -95,7 +96,7 @@
 									if ($i == $page) {
 										echo " class='active'";
 									}
-									echo '><a href="?id=' . $_GET['id'] . '&page=' . $i . '&itemsPerPage='. $items_per_page .'">' . $i . '</a></li>';
+									echo '><a href="?id=' . $id . '&page=' . $i . '&itemsPerPage='. $items_per_page .'">' . $i . '</a></li>';
 								}
 								echo "</ul></div>";
 							}
@@ -103,7 +104,7 @@
 						}
 						else{
 							echo "<div class='jumbotron'> <h4 class='text-center'> User don't save any measurement yet! </h4> <br/> </div>";
-							$sql = "UPDATE user SET property = '000' WHERE user.ID = '$_GET[id]'";
+							$sql = "UPDATE user SET property = '000' WHERE user.ID = '$id'";
 							mysqli_query($connect, $sql);
 						}
 					?>
@@ -138,7 +139,7 @@
 	}
 	else{
 		$_SESSION['error'] = 'Request failed';
-		header("location:http://localhost/Property-Management/admin/");
+		header("location:./");
 		exit;
 	}
 ?>

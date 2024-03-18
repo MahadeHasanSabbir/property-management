@@ -6,16 +6,16 @@
 	<?php
 		session_start();
 		if(isset($_SESSION['id'])){
-			header("location:http://localhost/Property-Management/auth");
+			header("location:../auth");
 			exit;
 			
 		}
 		else if(isset($_SESSION['aid'])){
-			header("location:http://localhost/Property-Management/admin");
+			header("location:../admin");
 			exit;
 		}
 		else{
-			header("location:http://localhost/Property-Management");
+			header("location:../");
 			exit;
 		}
 	?>

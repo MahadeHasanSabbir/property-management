@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	if(isset($_SESSION['aid'])){
-		header("location:http://localhost/Property-Management/admin");
+		header("location:../admin");
 		exit;
 	}
 	$connect = mysqli_connect("localhost","root","","property");

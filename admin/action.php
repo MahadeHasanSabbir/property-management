@@ -31,7 +31,7 @@
 			$_SESSION['aid'] = $id;
 			mysqli_close($connect);
 			//method to redirect this page to another page
-			header("location:http://localhost/Property-Management/admin/adminprofile.php");
+			header("location:./adminprofile.php");
 		}
 		else if(password_verify($password, $row['password']) && $npass){
 			$npass = password_hash($_POST['password'], PASSWORD_BCRYPT);
@@ -46,12 +46,12 @@
 			
 			mysqli_close($connect);
 			//method to redirect this page to another page
-			header("location:http://localhost/Property-Management/admin/adminprofile.php");
+			header("location:./adminprofile.php");
 		}
 	}
 	else{
 		$_SESSION['error'] = 'Request failed';
-		header("location:http://localhost/Property-Management/admin/");
+		header("location:./");
 		exit;
 	}
 ?>

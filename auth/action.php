@@ -61,10 +61,10 @@
 		
 		//method to redirect this page to another page
 		mysqli_close($connect);
-		header("location:http://localhost/Property-Management/auth/log.php?id=$id");
+		header("location:./log.php?id=$id");
 	}
 	else{
-		header("location:http://localhost/Property-Management/auth");
+		header("location:./");
 		exit;
 	}
 ?>

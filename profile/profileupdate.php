@@ -83,37 +83,37 @@
 				<script>
 					function infovalidate(){
 						//Regular Expressions
-						var namepattern = /^[A-Za-z \.]{3,35}$/i;
-						var numberpattern = /^[0-9]{11}$/;
-						var emailpattern = /^[a-zA-Z0-9]+[a-zA-Z0-9_.-]+[a-zA-Z0-9_-]+@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{2,4}$/;
-						var passwordpattern = /^[a-z0-9\@\#\$\%\&]{4,8}$/i;
+						var namePattern = /^[A-Za-z \.]{3,35}$/i;
+						var numberPattern = /^[0-9]{11}$/;
+						var emailPattern = /^[a-zA-Z0-9]+[a-zA-Z0-9_.-]+[a-zA-Z0-9_-]+@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{2,4}$/;
+						var passwordPattern = /^[a-z0-9\@\#\$\%\&]{4,8}$/i;
 						
 						//Values from user
-						var namevalue = document.getElementById('name').value;
-						var numbervalue = document.getElementById('number').value;
-						var emailvalue = document.getElementById('mail').value;
-						var passwordvalue = document.getElementById('pass').value;
+						var nameValue = document.getElementById('name').value;
+						var numberValue = document.getElementById('number').value;
+						var emailValue = document.getElementById('mail').value;
+						var passwordValue = document.getElementById('pass').value;
 						
 						//Validate the value
-						if(!namepattern.test(namevalue)){
+						if(!namePattern.test(nameValue)){
 							/* document.getElementById('name').style.color="red"; */
 							alert("Incorrect name");
 							return false;
 						}
-						else if(!numberpattern.test(numbervalue)){
+						else if(!numberPattern.test(numberValue)){
 							alert("Incorrect number");
 							return false;
 						}
-						else if(!emailpattern.test(emailvalue)){
+						else if(!emailPattern.test(emailValue)){
 							alert("Incorrect E-mail");
 							return false;
 						}
-						else if(!passwordpattern.test(passwordvalue)){
+						else if(!passwordPattern.test(passwordValue)){
 							alert("Incorrect password");
 							return false;
 						}
 						else{
-							if(confirm("Dear, " + namevalue + ". Your information will update.\nClick ok to proceed")){
+							if(confirm("Dear, " + nameValue + ". Your information will update.\nClick ok to proceed")){
 								return true;
 							}else{
 								return false;
@@ -122,23 +122,23 @@
 					}
 					function mailvalidate(){
 						//Regular Expressions
-						var passwordpattern = /^[a-z0-9\@\#\$\%\&]{4,8}$/i;
+						var passwordPattern = /^[a-z0-9\@\#\$\%\&]{4,8}$/i;
 						
 						//Values from user
-						var passwordvalue = document.getElementById('opass').value;
-						var npasswordvalue = document.getElementById('npass').value;
+						var passwordValue = document.getElementById('opass').value;
+						var nPasswordValue = document.getElementById('npass').value;
 						
 						//Validate the value
-						if(!passwordpattern.test(passwordvalue)){
+						if(!passwordPattern.test(passwordValue)){
 							alert("Incorrect password! Please follow the pattern of the password.");
 							return false;
 						}
-						else if(!passwordpattern.test(npasswordvalue)){
+						else if(!passwordPattern.test(nPasswordValue)){
 							alert("Incorrect password! Please follow the pattern of the password.");
 							return false;
 						}
 						else{
-							if(confirm("Dear, " + namevalue + ". Your password will update.\nClick ok to proceed")){
+							if(confirm("Dear, " + nameValue + ". Your password will update.\nClick ok to proceed")){
 								return true;
 							}else{
 								return false;
@@ -152,7 +152,7 @@
 	mysqli_close($connect);
 	}
 	else{
-		header("location:http://localhost/Property-Management/auth");
+		header("location:../auth");
 		exit;
 	}
 ?>

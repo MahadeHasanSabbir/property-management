@@ -106,7 +106,7 @@
 	mysqli_close($connect);
 	}
 	else{
-		header("location:http://localhost/Property-Management/auth");
+		header("location:../auth");
 		exit;
 	}
 ?>

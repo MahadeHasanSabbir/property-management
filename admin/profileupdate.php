@@ -5,7 +5,8 @@
 		$connect = mysqli_connect("localhost","root","","property");
 
 		//sql query to find user information from database
-		$sql= "SELECT * FROM user WHERE ID = '$_GET[id]'";
+		$id = mysqli_real_escape_string($connect, $_GET['id']);
+		$sql= "SELECT * FROM user WHERE ID = '$id'";
 
 		//take data from database
 		$data = mysqli_query($connect, $sql);
@@ -46,30 +47,30 @@
 				<script>
 					function validate(){
 						//Regular Expressions
-						var namepattern = /^[A-Za-z \.]{3,35}$/i;
-						var numberpattern = /^\+88[0-9]{11}$/;
-						var emailpattern = /^[a-zA-Z0-9]+[a-zA-Z0-9_.-]+[a-zA-Z0-9_-]+@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{2,4}$/;
+						var namePattern = /^[A-Za-z \.]{3,35}$/i;
+						var numberPattern = /^\+88[0-9]{11}$/;
+						var emailPattern = /^[a-zA-Z0-9]+[a-zA-Z0-9_.-]+[a-zA-Z0-9_-]+@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{2,4}$/;
 						
 						//Values from user
-						var namevalue = document.getElementById('name').value;
-						var numbervalue = document.getElementById('number').value;
-						var emailvalue = document.getElementById('mail').value;
+						var nameValue = document.getElementById('name').value;
+						var numberValue = document.getElementById('number').value;
+						var emailValue = document.getElementById('mail').value;
 						
 						//Validate the value
-						if(!namepattern.test(namevalue)){
+						if(!namePattern.test(nameValue)){
 							alert("Incorrect name");
 							return false;
 						}
-						else if(!numberpattern.test(numbervalue)){
+						else if(!numberPattern.test(numberValue)){
 							alert("Incorrect number");
 							return false;
 						}
-						else if(!emailpattern.test(emailvalue)){
+						else if(!emailPattern.test(emailValue)){
 							alert("Incorrect E-mail");
 							return false;
 						}
 						else{
-							if(confirm(namevalue + "'s information will update.\nClick ok to proceed")){
+							if(confirm(nameValue + "'s information will update.\nClick ok to proceed")){
 								return true;
 							}else{
 								return false;
@@ -84,7 +85,7 @@
 	}
 	else{
 		$_SESSION['error'] = 'Request failed';
-		header("location:http://localhost/Property-Management/admin/");
+		header("location:./");
 		exit;
 	}
 ?>

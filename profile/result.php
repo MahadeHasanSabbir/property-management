@@ -92,7 +92,7 @@ if(isset($_SESSION['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 else {
-    header("location:http://localhost/Property-Management/auth");
+    header("location:../auth");
     exit;
 }
 ?>

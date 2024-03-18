@@ -2,18 +2,18 @@
 	session_start();
 	//route for user access
 	if(isset($_SESSION['id'])){
-		header("location:http://localhost/Property-Management/profile/");
+		header("location:../profile/");
 		exit;
 	}
 	//route for admin access
 	else if(isset($_SESSION['aid'])){
-		header("location:http://localhost/Property-Management/admin");
+		header("location:../admin");
 		exit;
 	}
 	//route for unauthorized access
 	else{
 		$_SESSION['error'] = 'Request failed';
-		header("location:http://localhost/Property-Management/auth/log.php");
+		header("location:./log.php");
 		exit;
 	}
 ?>

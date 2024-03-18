@@ -27,26 +27,26 @@
 				// Login successful
 				$_SESSION['aid'] = $id;
 				mysqli_close($con);
-				header('location: http://localhost/Property-Management/admin/adminprofile.php');
+				header('location:./adminprofile.php');
 				exit;
 			} else {
 				// Login failed - incorrect password
 				$_SESSION['error'] = 'Incorrect password';
 				mysqli_close($con);
-				header('location: http://localhost/Property-Management/admin/');
+				header('location:./');
 				exit;
 			}
 		} else {
 			// Login failed - user not found
 			$_SESSION['error'] = 'User not found';
 			mysqli_close($con);
-			header('location: http://localhost/Property-Management/admin/');
+			header('location:./');
 			exit;
 		}
 	} else {
 		// Login failed - request failed
 		$_SESSION['error'] = 'Request failed';
-		header('location: http://localhost/Property-Management/admin/');
+		header('location:./');
 		exit;
 	}
 ?>

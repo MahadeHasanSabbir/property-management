@@ -8,13 +8,13 @@
 		$data = mysqli_query($connect, $query);
 		$row = mysqli_fetch_assoc($data);
 		
-		$password = $_POST['password'];
+		$password = mysqli_real_escape_string($connect, $_POST['password']);
 
 		if(password_verify($password, $row['password']) && !isset($_POST['npassword'])){
 			//local variable
-			$name = $_POST['name'];
-			$number = $_POST['number'];
-			$email = $_POST['email'];
+			$name = mysqli_real_escape_string($connect, $_POST['name']);
+			$number = mysqli_real_escape_string($connect, $_POST['number']);
+			$email = mysqli_real_escape_string($connect, $_POST['email']);
 
 			//sql query
 			$sql = "UPDATE user SET name = '$name', mail = '$email', phone = '$number' WHERE user.ID = '$_SESSION[id]';";
@@ -24,7 +24,7 @@
 		}
 		else if(password_verify($password, $row['password']) && isset($_POST['npassword'])){
 			//local variable
-			$npass = password_hash($_POST['npassword'], PASSWORD_BCRYPT);
+			$npass = password_hash(mysqli_real_escape_string($connect, $_POST['npassword']), PASSWORD_BCRYPT);
 
 			//keep track last password change
 			$date = new DateTime();
@@ -38,11 +38,11 @@
 		}
 		//method to redirect this page to another page
 		mysqli_close($connect);
-		header("location:http://localhost/Property-Management/profile/about.php");
+		header("location:./about.php");
 		exit;
 	}
 	else{
-		header("location:http://localhost/Property-Management/auth");
+		header("location:../auth");
 		exit;
 	}
 ?>

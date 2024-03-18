@@ -12,12 +12,12 @@
 
 		$_SESSION['success'] = "Log out successful";
 		mysqli_close($connect);
-		header("location:http://localhost/Property-Management/admin");
+		header("location:./");
 		exit;
 	}
 	else{
 		$_SESSION['error'] = 'Request failed';
-		header("location:http://localhost/Property-Management/admin/");
+		header("location:./");
 		exit;
 	}
 ?>

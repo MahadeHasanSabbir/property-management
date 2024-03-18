@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	if(isset($_SESSION['aid'])){
-		header("location:http://localhost/Property-Management/admin");
+		header("location:../admin");
 		exit;
 	}
 	if(isset($_SESSION['id'])){
@@ -88,7 +88,7 @@
 	}
 	else{
 		$_SESSION['error'] = 'Request failed';
-		header("location:http://localhost/Property-Management/auth/log.php");
+		header("location:../auth/log.php");
 		exit;
 	}
 ?>
