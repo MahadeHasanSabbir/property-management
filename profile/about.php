@@ -85,7 +85,7 @@
 							<b class="col-sm-3 col-xs-7"> Last log-in </b>
 							<span class="col-sm-9 col-xs-5"> : &nbsp
 							<?php
-								if($row['lastlog'] == '0000-00-00'){
+								if($row['lastlog'] == NULL){
 									echo "N/A </span> </br>";
 								}
 								else{

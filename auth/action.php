@@ -1,7 +1,7 @@
 <?php
-	if(isset($_POST['name']) && isset($_POST['password'])){
+	if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		//create connection with database
-		$connect = mysqli_connect("localhost","root","","property");
+		$connect = mysqli_connect("localhost","root","","property") or die("Connection has failed!");
 		
 		//local variable
 		$name = mysqli_real_escape_string($connect, $_POST['name']);
@@ -13,7 +13,7 @@
 		$sqlquery = "SELECT ID, users FROM admin";
 
 		//take data from database
-		$data = mysqli_query($connect, $sqlquery);
+		$data = mysqli_query($connect, $sqlquery) or die("Connection has failed!");
 		
 		//convert 2D array to 1D array
 		$row = mysqli_fetch_assoc($data);
@@ -53,9 +53,9 @@
 			PRIMARY KEY (`UID`)) ENGINE = InnoDB;";
 
 		//method for upload data to database
-		mysqli_query($connect, $sqlquery1);
-		mysqli_query($connect, $sqlquery2);
-		mysqli_query($connect, $sqlquery3);
+		mysqli_query($connect, $sqlquery1) or die("Failed to upload data!");
+		mysqli_query($connect, $sqlquery2) or die("Failed to upload data!");
+		mysqli_query($connect, $sqlquery3) or die("Failed to upload data!");
 		
 		//mail to user
 		

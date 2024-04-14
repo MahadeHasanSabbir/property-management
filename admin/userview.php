@@ -56,7 +56,7 @@
 							echo "<b class='col-sm-3 col-xs-3'> E-mail </b> <span class='col-sm-9'> : &nbsp", $row["mail"], "</span> </br>";
 							echo "<b class='col-sm-3 col-xs-5' style='padding-right:0px;'> Property count </b> <span class='col-sm-9'> : &nbsp", round($row["property"]), "</span> </br>";
 							echo "<b class='col-sm-3 col-xs-4' style='padding-right:0px;'> Last log-in </b> <span class='col-sm-9'> : &nbsp";
-							if($row['lastlog'] == '0000-00-00'){
+							if($row['lastlog'] == NULL){
 								echo "N/A </span> </br>";
 							}
 							else{

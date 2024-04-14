@@ -44,7 +44,7 @@
 						echo "<b class='col-sm-3 col-xs-4'> Admin </b> <span class='col-sm-9'> : &nbsp", $row["ID"], "</span></br>";
 						echo "<b class='col-sm-3 col-xs-4'> Last password change </b> <span class='col-sm-9'> : &nbsp", $row["passlast"], "</span></br>";
 						echo "<b class='col-sm-3 col-xs-4'> Last time log-in </b> <span class='col-sm-9'> : &nbsp";
-						if($row['lastlog'] == '0000-00-00'){
+						if($row['lastlog'] == NULL){
 							echo "N/A </span> </br>";
 						}
 						else{
