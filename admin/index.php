@@ -49,7 +49,7 @@
 					}
 
 				?>
-				<form class="form-horizontal" action="authentication.php" method="post">
+				<form class="form-horizontal" action="./authentication.php" method="post">
 					<div class="form-group">
 						<label class="control-label"> Admin ID </label>
 						<input type="text" name="id" class="form-control" id="id" placeholder="Enter admin ID" required="" autofocus />

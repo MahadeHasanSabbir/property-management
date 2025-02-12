@@ -55,6 +55,7 @@
 					<a href="./adminprofileupdate.php" class="btn btn-md btn-sm btn-warning" onclick="return permit1()"> Edit info </a>
 					</div>
 					<div class="well">
+						<!--visitor information-->
 						<p class="text-center"> Website reach information </p>
 						<div class="row">
 							<div class="col-sm-4 text-center">
@@ -119,6 +120,7 @@
 								<a class="btn btn-md btn-sm btn-warning" onclick="return permit4()" href="./delete.php?dd=1"> Clear all info</a>
 							</div>
 						</div> <hr/>
+						<!--user information-->
 						<p class="text-center"> Website user information </p>
 						<div class="row">
 							<div class="col-sm-4 text-center">
