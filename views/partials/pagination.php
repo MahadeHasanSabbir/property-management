@@ -2,11 +2,8 @@
 /**
  * Pagination control, used by every paged list in the app.
  *
- * The legacy project had two divergent implementations of this — one in
- * profile/view.php and another in admin/view.php — and both mangled the URL
- * with string surgery (`url.slice(0, -2)` if the URL happened to contain a '0').
- * There is one copy now, and it rebuilds links through url() so the encoded ?q=
- * token always carries the active filters forward.
+ * One implementation for every paged list. Links are rebuilt through url(), so
+ * the encoded ?q= token always carries the active filters forward.
  *
  * @var string $basePath  route path, e.g. 'properties/search'
  * @var int    $page

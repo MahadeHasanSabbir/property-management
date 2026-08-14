@@ -65,28 +65,6 @@ cfg('APP_ENV', 'prod');   // hides errors, logs them instead
 
 It is loaded before the defaults and is gitignored.
 
-### Migrating from the old version
-
-The previous release stored each user's records in a **separate MySQL table**
-(`user240225001`, …). To bring that data across:
-
-```bash
-php database/migrate_legacy.php            # dry run — writes nothing
-php database/migrate_legacy.php --commit   # actually migrate
-```
-
-It reads the old `property` database and never modifies it, so the old
-installation keeps working for side-by-side comparison. Every anomaly it finds
-is recorded rather than fatal:
-
-```sql
-SELECT * FROM migration_report ORDER BY id;
-```
-
-Re-running is a no-op, so it is safe to fix a flagged row and run it again.
-Because sign-in is now by e-mail, a user with a missing or duplicate address is
-skipped and reported rather than guessed at.
-
 ---
 
 ## Layout
@@ -99,7 +77,7 @@ includes/          all classes, config and shared code (deny-all .htaccess)
 views/             templates only — no SQL, no literal English
 resources/         css/ js/ vendor/{bootstrap, bootstrap-icons, noto-bengali}
 storage/           uploads/ and logs/ (deny-all .htaccess, PHP engine off)
-database/          schema.sql · seed.sql · migrate_legacy.php · reindex.php
+database/          schema.sql · seed.sql · reindex.php
 ```
 
 Classes are flat in `includes/` as `class.Name.php` under the `App\` namespace,
@@ -193,12 +171,15 @@ digits, because they must match the paper document exactly.
 
 ## Security
 
-If you are upgrading, note that the following are fixed here and were live
-problems in the previous version: SQL injection on the sign-in page, missing
-output escaping everywhere, no CSRF protection with account deletion on a bare
-`GET`, a logout that did not end the session, no session-id regeneration, no
-login throttling, an admin password reset that set the password to the user's
-own (sequential) id, and database credentials hardcoded in 29 files.
+Properties this codebase maintains, and which are worth preserving in any change
+you make to it:
+
+- every query is a prepared statement with bound parameters;
+- every value rendered into a page goes through `e()`;
+- every state-changing route is POST and CSRF-verified;
+- sessions are regenerated on sign-in and destroyed on sign-out;
+- sign-in attempts are throttled per identifier;
+- database credentials live in one file, and the application never issues DDL.
 
 Before putting this on a network:
 

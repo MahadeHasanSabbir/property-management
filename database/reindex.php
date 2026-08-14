@@ -10,8 +10,8 @@
  * a bug in the comma splitter can be corrected and the index regenerated,
  * because nothing the user typed was ever thrown away.
  *
- * Run it after changing split_tokens(), after a migration, or any time the
- * search results look wrong.
+ * Run it after changing split_tokens(), or any time the search results look
+ * wrong.
  */
 
 declare(strict_types=1);

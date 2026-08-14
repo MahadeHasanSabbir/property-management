@@ -2,10 +2,8 @@
 /**
  * The one and only navigation bar. Links shown depend on the signed-in role.
  *
- * Legacy note: the four header.php copies each highlighted the active tab with
- * basename($_SERVER['PHP_SELF']), which under a front controller is always
- * "index.php" — every item would light up at once. The active item is passed in
- * explicitly instead.
+ * The active item is passed in explicitly rather than derived from the script
+ * name, which under a front controller is the same for every page.
  *
  * @var string $active
  */

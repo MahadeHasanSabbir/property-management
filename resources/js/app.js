@@ -1,15 +1,10 @@
 /* ---------------------------------------------------------------------------
    Property Management — application scripts.
 
-   No jQuery. The legacy style/js/jscript.js used none either; Bootstrap 3's JS
-   was only doing navbar collapse and alert dismissal, both of which Bootstrap
-   5's bundle handles natively.
+   No jQuery — Bootstrap 5's bundle covers navbar collapse and alert dismissal.
 
-   The legacy file also held ten near-identical confirm() wrappers (permit,
-   permit1..4, apermit, apermit1..2, giveinfo, givealert) which were the ONLY
-   thing standing in front of destructive GET endpoints. Those endpoints are now
-   POST + CSRF and authorised server-side; the confirmation below is a courtesy,
-   not a control.
+   The confirmation below is a courtesy, not a control: destructive actions are
+   POST + CSRF and authorised server-side.
    --------------------------------------------------------------------------- */
 
 (function () {
@@ -38,8 +33,8 @@
             return;
         }
 
-        // Stop double submission on slow connections — the legacy app had no
-        // guard, so an impatient second click could create a duplicate record.
+        // Stop double submission on slow connections, where an impatient
+        // second click would otherwise create a duplicate record.
         var submit = form.querySelector('[type="submit"]');
         if (submit && !form.hasAttribute('data-no-lock')) {
             window.setTimeout(function () {
@@ -60,9 +55,9 @@
 
     /**
      * Normalise comma-separated number inputs on blur: "1232 , 25 ,12" becomes
-     * "1232, 25, 12". Legacy data contains exactly that spacing, so tolerate it
-     * on input and tidy it for display. The server splits and validates
-     * regardless — this is presentation only.
+     * "1232, 25, 12". Spacing like that is common, so tolerate it on input and
+     * tidy it for display. The server splits and validates regardless — this is
+     * presentation only.
      */
     document.addEventListener('blur', function (event) {
         var el = event.target;

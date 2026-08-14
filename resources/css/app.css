@@ -1,9 +1,7 @@
 /* ---------------------------------------------------------------------------
    Property Management — application styles.
 
-   Everything here was previously scattered across ~20 per-file <style> blocks
-   in the legacy pages. Bootstrap 5.3 handles layout; this file only covers
-   what Bootstrap does not.
+   Bootstrap 5.3 handles layout; this file only covers what Bootstrap does not.
    --------------------------------------------------------------------------- */
 
 /* --- Bengali typography ---------------------------------------------------

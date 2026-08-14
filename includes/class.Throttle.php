@@ -1,7 +1,6 @@
 <?php
 /**
- * Login throttling. The legacy app had none at all: an attacker could try
- * passwords indefinitely against sequential, guessable user ids.
+ * Login throttling.
  *
  * Counted per identifier (the e-mail) first. Per-IP limits are also recorded,
  * but on XAMPP every request arrives from 127.0.0.1, so an IP-only design would

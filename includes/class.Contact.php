@@ -1,15 +1,9 @@
 <?php
 /**
- * Contact messages — replaces the legacy `massage` table.
+ * Contact messages from the public form.
  *
- * Two legacy defects are fixed here by construction:
- *   - the old table's PRIMARY KEY was its TIMESTAMP column, so two messages in
- *     the same second collided and one was silently lost (nothing checked the
- *     result of the insert);
- *   - the old insert interpolated $_POST directly into the SQL on a public,
- *     unauthenticated endpoint, and the admin panel then echoed the stored
- *     values unescaped — a stored XSS path from any anonymous visitor straight
- *     into an administrator's session.
+ * This is an unauthenticated endpoint whose output is read by administrators,
+ * so every value is bound on the way in and escaped on the way out.
  */
 
 namespace App;

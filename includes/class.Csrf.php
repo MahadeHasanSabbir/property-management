@@ -2,11 +2,9 @@
 /**
  * CSRF protection.
  *
- * The legacy app had none, and combined that with destructive actions on GET.
- * The worst case was profile/delete.php, which deleted the signed-in account
- * and dropped its data table on a bare GET with no parameters — meaning an
- * <img src="..."> on any third-party page destroyed an account. Every
- * state-changing route here is POST and every POST is verified.
+ * Every state-changing route is POST, and every POST is verified here — which
+ * is what stops a third-party page from triggering an action on behalf of a
+ * signed-in visitor.
  */
 
 namespace App;

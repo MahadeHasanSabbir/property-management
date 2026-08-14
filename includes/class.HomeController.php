@@ -2,10 +2,8 @@
 /**
  * Public pages: home, about, the inheritance calculator, and the contact form.
  *
- * Legacy note: index.php, about.php and distribution.php all redirected a
- * signed-in visitor away to /auth. That was a UX defect dressed up as access
- * control — there is no reason a signed-in user cannot read the home page — so
- * these pages are now open to everyone.
+ * Open to everyone, signed in or not — there is no reason a signed-in visitor
+ * should be redirected away from the home page.
  */
 
 namespace App;
@@ -47,12 +45,8 @@ final class HomeController
     }
 
     /**
-     * Store a contact message.
-     *
-     * The legacy version took $_POST['name'], ['email'] and ['text'] with no
-     * escaping whatsoever and interpolated all three into an INSERT on a public
-     * endpoint. Here everything is validated, bound, and escaped again on
-     * output in the admin panel.
+     * Store a contact message. Public and unauthenticated, so every field is
+     * validated and bound here and escaped again where it is displayed.
      */
     public function storeMessage(): void
     {

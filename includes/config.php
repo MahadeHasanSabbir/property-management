@@ -1,12 +1,8 @@
 <?php
 /**
  * Central application configuration — the single source of truth for database
- * credentials and app-wide settings.
- *
- * The legacy code inlined mysqli_connect("localhost","root","","property") in
- * 29 separate files; changing the host or password meant 29 edits. Everything
- * now reads from here, and includes/class.Database.php is the only file that
- * consumes the credentials.
+ * credentials and app-wide settings. includes/class.Database.php is the only
+ * file that consumes the credentials.
  *
  * To use different credentials without touching version control, create
  * includes/config.local.php and call cfg() there — it is gitignored and loaded
@@ -42,10 +38,6 @@ cfg('DB_NAME', 'property_v2');
 cfg('DB_USER', 'root');
 cfg('DB_PASS', '');
 cfg('DB_CHARSET', 'utf8mb4');
-
-// Legacy database, read by database/migrate_legacy.php only. Never opened by
-// the application itself.
-cfg('LEGACY_DB_NAME', 'property');
 
 // --- Application -------------------------------------------------------------
 cfg('APP_NAME', 'Property Management');
@@ -96,8 +88,8 @@ cfg('UPLOAD_MAX_BYTES', 5 * 1024 * 1024); // 5 MB per document
 cfg('UPLOAD_ALLOWED_MIME', 'application/pdf,image/jpeg,image/png,image/webp');
 
 // --- Pagination --------------------------------------------------------------
-// Whitelisted page sizes. The legacy code passed $_GET['itemsPerPage'] straight
-// into "LIMIT $offset, $items_per_page" with no cast, which was injectable.
+// Whitelisted page sizes. Anything not in this list is rejected rather than
+// reaching a LIMIT clause.
 cfg('PAGE_SIZES', '10,15,20,50');
 cfg('PAGE_SIZE_DEFAULT', 15);
 

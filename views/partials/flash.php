@@ -2,10 +2,7 @@
 /**
  * One-shot notices. Rendered once per page by the layout.
  *
- * Legacy note: flash handling used to be tangled up with session teardown —
- * logout wrote $_SESSION['success'] and the login page's rendering of that
- * message was what actually destroyed the session. Here a flash is only a
- * message.
+ * A flash is only a message: nothing else hangs off rendering one.
  */
 
 defined('APP_BOOTSTRAPPED') || exit;

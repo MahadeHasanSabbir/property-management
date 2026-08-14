@@ -9,7 +9,6 @@
 
 # Database dumps and backups
 *.sql.bak
-/database/legacy-backup.sql
 /database/*-backup.sql
 
 # Editor / OS noise

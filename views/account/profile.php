@@ -68,9 +68,8 @@ use App\Csrf;
     </div>
 </div>
 
-<?php /* Self-deletion requires the account password and a POST. The legacy
-         version ran on a bare GET with no parameters at all, so an <img> tag
-         pointing at it destroyed the account. */ ?>
+<?php /* Self-deletion requires the account password and a POST, so it cannot
+         be triggered by anything a visitor merely loads. */ ?>
 <?php if (Auth::isCustomer()): ?>
     <div class="card border-danger-subtle">
         <div class="card-body">

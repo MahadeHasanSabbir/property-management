@@ -2,9 +2,8 @@
 /**
  * A customer's records, read-only, for staff.
  *
- * Reuses the same table partial as the customer's own listing, so the two can
- * never drift apart — the legacy admin/view.php and profile/view.php were ~80%
- * identical copies that both had to be edited for any change.
+ * Reuses the same table partial as the customer's own listing, so the two
+ * cannot drift apart.
  *
  * @var array $user
  * @var array $rows

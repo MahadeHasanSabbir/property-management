@@ -88,9 +88,8 @@ $isSelf = ((int) $user['id'] === Auth::id());
         <div class="card-body d-flex flex-wrap justify-content-between align-items-center gap-2">
             <div>
                 <h2 class="h6 mb-1"><?= te('admin.reset_password') ?></h2>
-                <?php /* A random temporary password is generated and shown once.
-                         The legacy reset set the password TO the user's own id,
-                         and ids were sequential — anyone could work one out. */ ?>
+                <?php /* A random temporary password, shown once and never
+                         derived from anything about the account. */ ?>
                 <p class="text-body-secondary small mb-0"><?= te('auth.must_change_password') ?></p>
             </div>
 

@@ -6,13 +6,10 @@
  * remainder is divided so that each son receives two shares to each daughter's
  * one.
  *
- * This existed twice in the legacy tree — distribution.php and
- * profile/distribution.php were ~88% identical, differing only in the session
- * guard and asset path prefixes, so every change had to be made twice. There is
- * one copy now, reachable signed in or not.
+ * Reachable signed in or not.
  *
- * The maths stays client-side, as before: it involves no stored data, so a
- * round trip would only make it slower.
+ * The maths stays client-side: it involves no stored data, so a round trip
+ * would only make it slower.
  */
 
 defined('APP_BOOTSTRAPPED') || exit;

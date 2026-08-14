@@ -2,10 +2,8 @@
 /**
  * Registration.
  *
- * All validation is enforced server-side in AccountController::register(). The
- * legacy form validated only in client-side JavaScript, so the rules were
- * advisory — and the name pattern it used, /^[A-Za-z .]{3,35}$/, rejected every
- * Bengali name.
+ * All validation is enforced server-side in AccountController::register();
+ * anything the browser checks is a convenience on top of that.
  */
 
 defined('APP_BOOTSTRAPPED') || exit;

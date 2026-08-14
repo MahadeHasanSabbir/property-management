@@ -126,7 +126,7 @@ $fields = [
     </div>
 </div>
 
-<?php /* Delete is POST + CSRF. The legacy equivalent was a GET link. */ ?>
+<?php /* Delete is POST + CSRF, never a link. */ ?>
 <form method="post" action="<?= e(url('properties/' . $property['id'] . '/delete')) ?>"
       data-confirm="<?= te('property.delete_confirm') ?>" class="no-print">
     <?= Csrf::field() ?>

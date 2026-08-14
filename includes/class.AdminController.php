@@ -59,14 +59,7 @@ final class AdminController
     // --- Dashboard -----------------------------------------------------------
 
     /**
-     * Tiles show counts that mean something.
-     *
-     * The legacy dashboard had six tiles and most were wrong: "Number of active
-     * user" ran SELECT COUNT(ID) FROM user (that is every user, not active
-     * ones); "registered user" read a drifting VARCHAR(3) counter instead of
-     * counting; and the "logged in today" tile compared a zero-padded date
-     * against values written with a non-padded day format, so it read 0 on the
-     * 1st through the 9th of every month.
+     * Every tile is a live COUNT over exactly the thing it is labelled with.
      */
     public function dashboard(): void
     {

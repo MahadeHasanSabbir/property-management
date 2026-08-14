@@ -2,12 +2,7 @@
 /**
  * Admin dashboard.
  *
- * Every tile is a live COUNT over the thing it names. The legacy dashboard had
- * six tiles and most were wrong — one labelled "active users" counted all
- * users, another read a drifting VARCHAR(3) counter instead of counting rows,
- * and the "logged in today" tile compared a zero-padded date against values
- * written with a non-padded day, so it read zero for the first nine days of
- * every month.
+ * Every tile is a live COUNT over exactly the thing it names.
  *
  * @var array $stats
  * @var array $recentUsers

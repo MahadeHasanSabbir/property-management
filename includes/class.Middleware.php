@@ -2,10 +2,8 @@
 /**
  * Route middleware — the single place access rules are enforced.
  *
- * The legacy app repeated `if (!isset($_SESSION['id'])) header("location:...")`
- * at the top of roughly thirty files, with two parallel session keys
- * ($_SESSION['id'] for users, $_SESSION['aid'] for admins) that could both be
- * set at once. Here there is one identity and one set of named guards.
+ * Access rules live here and are named on the route, never repeated inside a
+ * controller — a guard that has to be remembered is eventually forgotten.
  */
 
 namespace App;
@@ -64,8 +62,8 @@ final class Middleware
             redirect('login');
         }
 
-        // A user disabled or deleted mid-session must lose access immediately;
-        // the legacy code trusted the session key forever and never re-checked.
+        // A user disabled or deleted mid-session loses access immediately,
+        // rather than whenever their session happens to expire.
         if (Auth::user()['status'] !== 'active') {
             Auth::logout();
             flash('danger', t('auth.account_inactive'));

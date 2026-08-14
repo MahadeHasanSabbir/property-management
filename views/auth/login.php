@@ -2,10 +2,7 @@
 /**
  * Customer sign-in.
  *
- * Sign-in is by e-mail. The legacy form asked for a 9-digit generated id, and
- * prefilled it from ?id= via a query that interpolated $_GET straight into SQL
- * with no escaping at all — a pre-authentication injection on the login page
- * itself.
+ * Sign-in is by e-mail address.
  */
 
 defined('APP_BOOTSTRAPPED') || exit;

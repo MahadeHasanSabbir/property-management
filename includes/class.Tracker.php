@@ -1,11 +1,6 @@
 <?php
 /**
- * Page-view logging — replaces the legacy `visitors` table.
- *
- * Kept for auditing, but surfaced only as a simple 30-day count. The old admin
- * dashboard built four tiles on this data and every one of them was wrong:
- * the table's PRIMARY KEY was a 1-second TIMESTAMP, so concurrent visits
- * collided and the failed inserts were never checked.
+ * Page-view logging, kept for auditing and surfaced as a simple 30-day count.
  */
 
 namespace App;

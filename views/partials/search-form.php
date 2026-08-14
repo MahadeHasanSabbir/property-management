@@ -63,9 +63,8 @@ $formAction = $formAction ?? $basePath;
                        name="deed_no" value="<?= e($f['deed_no']) ?>" maxlength="40">
             </div>
 
-            <?php /* A dropdown of the user's own moujas. The legacy filter was
-                     `mouja = '$mouja'` against free text, so a typo or a case
-                     difference silently returned nothing. */ ?>
+            <?php /* Suggestions drawn from the user's own moujas, so an exact
+                     match does not depend on retyping it identically. */ ?>
             <div class="col-md-3">
                 <label for="f-mouja" class="form-label"><?= te('property.mouja') ?></label>
                 <input type="text" class="form-control" id="f-mouja" name="mouja"
@@ -77,7 +76,6 @@ $formAction = $formAction ?? $basePath;
                 </datalist>
             </div>
 
-            <?php /* Owner search did not exist at all in the legacy app. */ ?>
             <div class="col-md-3">
                 <label for="f-owner" class="form-label"><?= te('search.owner') ?></label>
                 <input type="text" class="form-control" id="f-owner" name="owner"
@@ -114,8 +112,8 @@ $formAction = $formAction ?? $basePath;
                        name="date_to" value="<?= e($f['date_to']) ?>">
             </div>
 
-            <?php /* Defaults to AND. The legacy query OR-ed every filter, so
-                     adding a second one widened the results. */ ?>
+            <?php /* Defaults to AND, so each additional filter narrows the
+                     result rather than widening it. */ ?>
             <div class="col-md-3">
                 <label for="f-mode" class="form-label"><?= te('search.mode') ?></label>
                 <select class="form-select" id="f-mode" name="mode">

@@ -2,9 +2,7 @@
 /**
  * Create / edit a property record.
  *
- * One form for both, since the fields are identical — the legacy project had
- * this logic spread across store.php (form), upload.php (insert and update) and
- * a separate prefill query.
+ * One form for both create and edit, since the fields are identical.
  *
  * @var array|null $property  null when creating
  * @var array      $moujas
@@ -49,17 +47,14 @@ $v = static function (string $field) use ($property): string {
                            name="deed_no" value="<?= e($v('deed_no')) ?>" maxlength="40" required>
                 </div>
 
-                <?php /* Nullable, unlike the legacy `rdate DATE NOT NULL` which
-                         the insert never populated — every existing row holds
-                         '0000-00-00'. */ ?>
+                <?php /* Optional: the registration date is often unknown. */ ?>
                 <div class="col-md-4">
                     <label for="deed_date" class="form-label"><?= te('property.deed_date') ?></label>
                     <input type="date" class="form-control" id="deed_date"
                            name="deed_date" value="<?= e($v('deed_date')) ?>">
                 </div>
 
-                <?php /* Numeric now, so it can be summed and range-searched.
-                         The legacy column was VARCHAR(7). */ ?>
+                <?php /* Numeric, so it can be summed and range-searched. */ ?>
                 <div class="col-md-4">
                     <label for="area_cent" class="form-label"><?= te('property.area') ?></label>
                     <input type="number" step="0.001" min="0" class="form-control"

@@ -2,8 +2,8 @@
 /**
  * User list.
  *
- * The record count is a live subquery, never a stored counter — the legacy
- * `user.property` column was a max-UID pointer that drifted away from reality.
+ * The record count is a live subquery rather than a stored counter, which
+ * would drift away from the rows it describes.
  *
  * @var array $rows
  */

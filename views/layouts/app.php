@@ -2,9 +2,8 @@
 /**
  * The single application layout.
  *
- * The legacy project hand-wrote <!DOCTYPE>, <head>, an inline <style> block and
- * the script tags in roughly twenty separate files, and kept four divergent
- * copies of header.php. There is now exactly one of each.
+ * There is exactly one <!DOCTYPE>, one <head> and one navbar in the project,
+ * and they live here.
  *
  * @var string      $content  rendered view body
  * @var string|null $title    page title (already translated)

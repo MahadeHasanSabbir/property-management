@@ -2,13 +2,11 @@
 /**
  * Plan quota enforcement.
  *
- * Two rules matter here, and both are reactions to how the legacy code behaved:
+ * Two rules:
  *
- *  1. The count is always a live COUNT(*), never a stored counter. The legacy
- *     `user.property` column was a max-UID pointer rather than a count (it held
- *     '019' for 19 rows), drifted out of step, and was "repaired" from inside
- *     page renders. Two different totals were displayed side by side on the old
- *     profile page as a result.
+ *  1. Usage is always a live COUNT(*), never a stored counter — a counter and
+ *     the rows it describes drift apart the moment anything writes outside the
+ *     single code path that maintains it.
  *
  *  2. Being over the limit makes an account read-only, never broken. An
  *     administrator can lower a limit below a user's current usage, so create
@@ -61,8 +59,6 @@ final class PlanLimit
      *
      * Runs inside the caller's transaction and locks the user row first, so two
      * simultaneous submissions cannot both pass the check and exceed the limit.
-     * The legacy code read a counter, added one and wrote it back with no lock
-     * at all.
      */
     public static function assertCanCreate(array $user): void
     {

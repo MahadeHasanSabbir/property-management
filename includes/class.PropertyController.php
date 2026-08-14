@@ -4,9 +4,7 @@
  * document attachments that hang off a record.
  *
  * Every action derives the owner from the session and passes it into the query,
- * so there is no path that reads another user's data. The legacy code built a
- * table name out of $_SESSION['id'] — or, in the admin pages, straight out of
- * $_GET, which meant `DROP TABLE user<whatever-you-typed>`.
+ * so there is no path that reads another user's data.
  */
 
 namespace App;
@@ -260,7 +258,7 @@ final class PropertyController
         redirect('properties/' . $property['id']);
     }
 
-    /** POST + CSRF. The legacy delete was `?key=N` on a GET link. */
+    /** POST + CSRF — deletion is never reachable by following a link. */
     public function destroy(string $id): void
     {
         $user     = Auth::user();
@@ -453,8 +451,8 @@ final class PropertyController
             $errors[] = t('valid.required', ['field' => t('property.mouja')]);
         }
 
-        // Owner names must accept Bengali script — the legacy rule was
-        // ASCII-only and rejected them outright.
+        // Owner names must accept Bengali script, so the rule is Unicode-aware
+        // rather than ASCII-only.
         foreach (['old_owner' => 'property.old_owner', 'new_owner' => 'property.new_owner'] as $key => $label) {
             if ($data[$key] !== '' && !valid_name($data[$key])) {
                 $errors[] = t('valid.name') . ' (' . t($label) . ')';

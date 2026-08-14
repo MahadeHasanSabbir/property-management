@@ -3,8 +3,7 @@
  * Audit trail — who did what, and when.
  *
  * Land records are provenance-sensitive: knowing which account edited or
- * deleted a deed entry matters. The legacy app recorded nothing beyond a
- * last-login date and a raw visitor IP list.
+ * deleted a deed entry matters.
  */
 
 namespace App;

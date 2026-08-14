@@ -3,10 +3,8 @@
  * Contact messages.
  *
  * Every field here comes from an anonymous, unauthenticated form, so all of it
- * is escaped on output. In the legacy admin panel these values were echoed raw,
- * which meant any internet visitor could store a <script> tag that then ran
- * inside an administrator's session — and from there drive the destructive GET
- * endpoints the old app exposed.
+ * is escaped on output — otherwise a visitor could store markup that runs
+ * inside an administrator's session.
  *
  * @var array $rows
  */

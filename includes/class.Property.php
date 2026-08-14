@@ -2,9 +2,6 @@
 /**
  * Property records — one row per land-deed entry.
  *
- * Replaces the legacy per-user tables (`user240225001` and friends), which were
- * created by DDL from a web request and dropped the same way.
- *
  * The four dag/khatian columns store the raw string exactly as typed, commas
  * and all. That string is canonical; property_identifiers is a derived index
  * rebuilt from it by reindex(), so a bug in the splitter can never lose data.
@@ -41,9 +38,7 @@ final class Property
      * Find a record that belongs to a specific user.
      *
      * Ownership is enforced in the query itself rather than by a later check,
-     * so there is no code path that fetches somebody else's row first. The
-     * legacy equivalent derived a table name from $_SESSION or, in the admin
-     * pages, straight from $_GET.
+     * so there is no code path that fetches somebody else's row first.
      */
     public static function findForUser(int $id, int $userId): ?array
     {
@@ -175,10 +170,8 @@ final class Property
     }
 
     /**
-     * Next per-user display number.
-     * Computed from the data, not from a stored counter — the legacy
-     * `user.property` column drifted and was periodically "repaired" from
-     * inside a page render.
+     * Next per-user display number, computed from the data rather than held in
+     * a counter that could drift away from it.
      */
     public static function nextSeq(int $userId): int
     {
@@ -225,19 +218,16 @@ final class Property
     /**
      * Search a user's records.
      *
-     * Notable differences from the legacy implementation:
+     * How it behaves:
      *
-     *  - Dag and khatian match EXACT tokens via property_identifiers. The old
-     *    query did `pdagno LIKE '%12,%' OR pdagno LIKE '%12'`, which cannot use
-     *    an index and is wrong: searching 12 also matched '512,34' and '3412'.
-     *  - Scope defaults to "current or previous". The old form forced an
-     *    either/or radio choice.
-     *  - Filters combine with AND by default. The old query OR-ed everything,
-     *    so adding a second filter widened the result set.
+     *  - Dag and khatian match EXACT tokens via property_identifiers, so
+     *    searching 12 does not also match '512,34' or '3412'.
+     *  - Scope defaults to "current or previous"; narrowing is optional.
+     *  - Filters combine with AND by default, so each one narrows the result.
      *  - EXISTS rather than JOIN: a record with three dag tokens would
      *    otherwise be returned three times.
-     *  - Sorting is whitelisted and LIMIT/OFFSET are bound integers. The old
-     *    code interpolated $_GET['itemsPerPage'] straight into LIMIT.
+     *  - Sorting is whitelisted and LIMIT/OFFSET are bound integers, so neither
+     *    can carry SQL.
      *
      * @param array $f filters, already sanitised by the controller
      * @return array{rows:array, total:int}

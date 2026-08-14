@@ -5,12 +5,10 @@
  * The active language comes from the signed-in user's stored preference, then
  * a cookie, then the configured default. Dictionaries live in includes/lang/.
  *
- * This is also what settles the terminology inconsistency in the legacy code,
- * where the same concept was `khatian` in the database, `khotiyan` in the form
- * field, and "Ledger No" on screen. Code and schema now use one canonical term
- * and every visible string is looked up here.
+ * Code and schema use one canonical domain term throughout (dag, khatian,
+ * mouja, deed); every visible label is looked up here instead.
  *
- * Adapted from the sister project (Aminship).
+ * Shares its shape with the sister project (Aminship).
  */
 
 namespace App;

@@ -7,9 +7,8 @@
  *
  * {placeholders} match a single path segment and are passed to the action in
  * declaration order. The third argument is a middleware name (or list) run
- * before the action — this is what replaces the ~30 copy-pasted
- * `if (!isset($_SESSION['id'])) header(...)` guards in the legacy code, where a
- * single forgotten guard meant an open door.
+ * before the action, so access rules are declared with the route rather than
+ * repeated inside each controller.
  */
 
 namespace App;

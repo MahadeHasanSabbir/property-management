@@ -5,9 +5,8 @@
  * Conventions:
  *   - Record ids are plain path segments; filters travel in the encoded ?q=
  *     token built by url().
- *   - Every state-changing route is POST. The legacy app deleted accounts,
- *     dropped tables, wiped analytics and reset passwords over GET, guarded
- *     only by a JavaScript confirm().
+ *   - Every state-changing route is POST, so no action can be triggered by
+ *     following a link or loading an image.
  *   - Access rules are the last argument, never repeated inside controllers.
  */
 

@@ -4,12 +4,8 @@
  * statement conveniences. Every query in the application goes through here, so
  * all user input is bound, never interpolated.
  *
- * This replaces 29 copies of mysqli_connect("localhost","root","","property")
- * and roughly the same number of raw interpolated query strings, none of which
- * used a prepared statement.
- *
- * Adapted from the sister project (Aminship) so both codebases share one data
- * layer shape.
+ * Shares its shape with the sister project (Aminship), so both codebases have
+ * the same data layer.
  */
 
 namespace App;
@@ -29,11 +25,7 @@ final class Database
         return self::$pdo;
     }
 
-    /**
-     * Open a connection to an arbitrary database. Used by the migration script,
-     * which needs the legacy schema alongside the new one.
-     */
-    public static function connect(string $database): \PDO
+    private static function connect(string $database): \PDO
     {
         $dsn = sprintf('mysql:host=%s;dbname=%s;charset=%s', DB_HOST, $database, DB_CHARSET);
 
@@ -81,9 +73,6 @@ final class Database
     }
 
     // --- Transactions --------------------------------------------------------
-    // The legacy registration ran three statements with no transaction, so a
-    // failure partway through left a user row whose data table was never
-    // created — an account permanently broken on every page load.
 
     public static function begin(): void
     {

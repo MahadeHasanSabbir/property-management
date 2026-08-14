@@ -10,11 +10,8 @@ defined('APP_BOOTSTRAPPED') || exit;
 // --- Output ------------------------------------------------------------------
 
 /**
- * Escape a value for safe HTML output.
- *
- * The legacy codebase contained zero htmlspecialchars calls across 3,178 lines,
- * which is why the public contact form could store a <script> tag that then
- * executed in the admin panel. This is deliberately the shortest thing to type.
+ * Escape a value for safe HTML output. Deliberately the shortest thing to type,
+ * so there is no incentive to skip it.
  */
 function e($value): string
 {
@@ -203,13 +200,12 @@ function old(string $key, string $default = ''): string
 }
 
 // --- Validation --------------------------------------------------------------
-// Server-side rules. The legacy app validated only in client-side JavaScript,
-// so every rule here is new enforcement rather than a port.
+// Server-side rules. Client-side validation is a convenience; these are the
+// ones that actually hold.
 
 /**
- * A person's name. Unicode-aware on purpose: the legacy rule was
- * /^[A-Za-z .]{3,35}$/, which rejects every Bengali name outright — a product
- * bug in an application for Bangladeshi land records.
+ * A person's name. Unicode-aware on purpose: an ASCII-only rule would reject
+ * every Bengali name, which is most of them here.
  */
 function valid_name(string $v): bool
 {
@@ -225,8 +221,7 @@ function valid_phone(string $v): bool
 /**
  * Normalise a Bangladeshi number to +880 form.
  * Accepts 01XXXXXXXXX, 8801XXXXXXXXX and +8801XXXXXXXXX. Returns null when the
- * input cannot be interpreted — legacy data contains '12345678909', which has
- * no leading zero and is not recoverable.
+ * input cannot be interpreted as a Bangladeshi mobile number.
  */
 function normalize_phone(string $v): ?string
 {
@@ -250,9 +245,7 @@ function valid_email(string $v): bool
 }
 
 /**
- * Password policy. The legacy client-side rule was 4–8 characters, which is
- * both too short and capped absurdly low; bcrypt handles anything up to 72
- * bytes, so the ceiling is raised and the floor lifted.
+ * Password policy. The ceiling is bcrypt's 72-byte input limit.
  */
 function valid_password(string $v): bool
 {
@@ -267,9 +260,9 @@ function valid_identifier_token(string $v): bool
 }
 
 /**
- * Split a comma-separated dag/khatian list into clean tokens.
- * Legacy data contains '1232 , 25 ,12' and '234, 113, 14', so spaces and empty
- * segments both have to be tolerated.
+ * Split a comma-separated dag/khatian list into clean tokens. Values arrive as
+ * '1232 , 25 ,12' as often as '1232,25,12', so spaces and empty segments are
+ * both tolerated.
  */
 function split_tokens(string $raw): array
 {

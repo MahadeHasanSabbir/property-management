@@ -2,20 +2,14 @@
 /**
  * Authentication and the identity of the current request.
  *
- * Replaces two parallel legacy systems ($_SESSION['id'] for users against the
- * `user` table, $_SESSION['aid'] for admins against `admin`) which could both
- * be set at once and were checked by hand at the top of ~30 files.
+ * One identity for every role, held in a single session key.
  *
- * Fixes carried over from the legacy behaviour:
- *   - logout genuinely destroys the session. The old logout.php only wrote a
- *     flash and redirected; the session was torn down as a side effect of the
- *     login page rendering that flash, so hitting logout and then navigating
- *     straight to /profile/ left you signed in.
- *   - the session id is regenerated on sign-in. The old code never called
- *     session_regenerate_id() anywhere, leaving session fixation wide open.
- *   - failed attempts are counted and throttled. There was no limit before.
+ * Rules this class enforces:
+ *   - logout destroys the session rather than merely redirecting;
+ *   - the session id is regenerated on sign-in, closing session fixation;
+ *   - failed attempts are counted and throttled;
  *   - the identity is re-read from the database each request, so a suspended or
- *     deleted account loses access immediately instead of when its session
+ *     deleted account loses access immediately rather than whenever its session
  *     happens to expire.
  */
 
@@ -121,8 +115,8 @@ final class Auth
 
         if (!$user || !$ok) {
             Throttle::record($email, false);
-            // One message for both cases. The legacy app said "User not found"
-            // versus "Incorrect password", which enumerates accounts.
+            // One message for both cases: distinguishing them would let this
+            // endpoint enumerate registered addresses.
             return ['ok' => false, 'error' => 'invalid', 'wait' => null];
         }
 

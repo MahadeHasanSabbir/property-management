@@ -2,9 +2,6 @@
 /**
  * Public landing page.
  *
- * Bootstrap 5 equivalents of the legacy markup: `jumbotron` and `well` were
- * removed in Bootstrap 4, `panel` became `card`, and glyphicons were dropped
- * entirely in favour of Bootstrap Icons.
  *
  * @var array $settings
  */
@@ -63,8 +60,7 @@ $features = [
 
     <div class="col-md-7">
         <h2 class="h4"><?= te('home.message_title') ?></h2>
-        <?php /* POST + CSRF. The legacy form posted to itself and the handler
-                 inlined $_POST straight into an INSERT with no escaping. */ ?>
+        <?php /* POST + CSRF; every field is validated and bound server-side. */ ?>
         <form method="post" action="<?= e(url('contact')) ?>" novalidate>
             <?= Csrf::field() ?>
 

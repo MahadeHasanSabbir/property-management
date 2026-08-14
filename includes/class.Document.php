@@ -2,9 +2,6 @@
 /**
  * Deed document attachments — storage and metadata.
  *
- * Entirely new: the legacy app had no file handling at all (profile/upload.php
- * was misleadingly named — it only inserted form text).
- *
  * Storage rules:
  *   - Files live in storage/uploads/, which is refused by two independent
  *     .htaccess rules and has the PHP engine switched off.

@@ -4,9 +4,7 @@
  *
  * Apache rewrites every request that is not a real file to this script (see
  * .htaccess), so URLs never carry a .php extension and every request passes
- * through the same bootstrap, CSRF check and middleware stack. In the legacy
- * layout all 39 PHP files were individually addressable and each had to repeat
- * its own session guard.
+ * through the same bootstrap, CSRF check and middleware stack.
  */
 
 require_once __DIR__ . '/includes/bootstrap.php';

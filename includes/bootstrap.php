@@ -63,8 +63,8 @@ if (!is_dir(LOG_PATH)) {
 }
 ini_set('error_log', LOG_PATH . '/php-error.log');
 
-// Convert warnings/notices into exceptions so they cannot be silently ignored
-// the way the legacy code ignored every failed mysqli_query().
+// Convert warnings/notices into exceptions so a failed query or a bad index
+// cannot be silently ignored.
 set_error_handler(static function (int $severity, string $message, string $file, int $line): bool {
     if (!(error_reporting() & $severity)) {
         return false; // suppressed with @ — respect it
@@ -121,7 +121,7 @@ if (PHP_SAPI !== 'cli' && session_status() !== PHP_SESSION_ACTIVE) {
         'secure'   => !empty($_SERVER['HTTPS']),
     ]);
     // Refuse session ids the server never issued, which is what makes session
-    // fixation possible. The legacy app never regenerated an id at all.
+    // fixation possible.
     ini_set('session.use_strict_mode', '1');
     ini_set('session.use_only_cookies', '1');
     session_start();

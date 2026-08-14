@@ -1,9 +1,8 @@
 <?php
 /**
  * The property records table. Shared by the customer listing, the search
- * results, and the admin's read-only view of a customer's records — so the
- * columns can never drift apart the way admin/view.php and profile/view.php did
- * (they were ~80% identical and both had to be edited for any change).
+ * results, and the admin's read-only view of a customer's records, so the
+ * columns cannot drift apart between them.
  *
  * @var array       $rows
  * @var string      $basePath   route the sort links point at
@@ -46,8 +45,7 @@ $header = static function (string $column, string $label) use ($basePath, $activ
 
 /**
  * Mark the token that matched the search inside a comma list, so it is obvious
- * why a row was returned. Compares whole tokens — never a substring, which is
- * the mistake the old LIKE '%12%' search made.
+ * why a row was returned. Compares whole tokens, never substrings.
  */
 $tokens = static function (string $raw) use ($highlight): string {
     if ($raw === '') {

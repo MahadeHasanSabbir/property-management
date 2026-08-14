@@ -3,8 +3,7 @@
  * Site settings. Key/value is the right shape here precisely because the set is
  * open-ended — unlike plan entitlements, which are typed columns on `plans`.
  *
- * The legacy app had no settings at all: contact details and page sizes were
- * hardcoded in the markup of individual files.
+ * Values an administrator can change without a deployment.
  */
 
 namespace App;

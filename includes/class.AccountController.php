@@ -70,9 +70,7 @@ final class AccountController
             AuditLog::record('auth.logout', 'user', (string) Auth::id());
         }
 
-        // Genuinely destroys the session, unlike the legacy logout.php which
-        // only set a flash and redirected — leaving the visitor signed in if
-        // they navigated anywhere other than the login page.
+        // Destroys the session itself, not merely the identity inside it.
         Auth::logout();
 
         flash('success', t('auth.signed_out'));
@@ -134,19 +132,15 @@ final class AccountController
 
         $plan = Plan::defaultCode();
 
-        // One transaction. The legacy registration ran three statements with no
-        // transaction at all, so a failure partway through left a user row whose
-        // data table had never been created — an account broken forever.
+        // One transaction: a half-created account is worse than none.
         $userId = Database::transaction(static function () use ($name, $email, $phone, $password, $plan) {
             return User::create([
                 'user_code' => User::nextUserCode(),
                 'name'      => $name,
                 'email'     => $email,
                 'phone'     => $phone,
-                // NOTE: the password is hashed as typed. The legacy code ran
-                // mysqli_real_escape_string() over it first, so any password
-                // containing a quote or backslash was hashed in its escaped
-                // form.
+                // Hashed exactly as typed — never escaped or trimmed first,
+                // which would silently alter passwords containing quotes.
                 'password'  => password_hash($password, PASSWORD_BCRYPT),
                 'role'      => 'customer',
                 'plan_code' => $plan,
@@ -355,9 +349,7 @@ final class AccountController
     /**
      * Delete one's own account.
      *
-     * POST-only and CSRF-protected. The legacy equivalent ran on a bare GET
-     * with no parameters at all, so an <img src> pointing at it destroyed the
-     * signed-in visitor's account and dropped their data table.
+     * POST-only, CSRF-protected, and gated on the account password.
      */
     public function deleteAccount(): void
     {

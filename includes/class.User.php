@@ -173,10 +173,8 @@ final class User
     /**
      * A page of users with their live record counts.
      *
-     * The count is computed here, never read from a stored counter: the legacy
-     * `user.property` column was a max-UID pointer rather than a count (it held
-     * '019' for 19 rows) and drifted out of step, which is why two different
-     * "total records" figures appeared side by side in the old profile page.
+     * The count is computed here rather than read from a stored counter, which
+     * would drift away from the rows it describes.
      */
     public static function paginate(int $limit, int $offset, string $search = '', string $role = ''): array
     {
@@ -232,10 +230,8 @@ final class User
 
     /**
      * Generate the next display code, e.g. 2608140001.
-     * Purely cosmetic — it is not a credential and not a primary key, so unlike
-     * the legacy scheme it cannot collide into a broken account. The legacy
-     * generator read a VARCHAR(3) counter, added one and wrote it back with no
-     * lock, and hard-capped at 999 users.
+     * Purely cosmetic: it is neither a credential nor a primary key, so a
+     * collision here could never break an account.
      */
     public static function nextUserCode(): string
     {

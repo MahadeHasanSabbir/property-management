@@ -2,10 +2,6 @@
 /**
  * Password reset tokens.
  *
- * The legacy "forgot password" was a mailto: link — there was no reset flow at
- * all, and an administrator's idea of a reset was to set the password equal to
- * the user's own (sequential, guessable) id.
- *
  * Only the SHA-256 of the token is stored, so reading the database does not
  * hand over working reset links.
  */

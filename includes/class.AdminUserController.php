@@ -2,14 +2,8 @@
 /**
  * Administration of user accounts and plans.
  *
- * Two legacy behaviours are deliberately not reproduced:
- *   - "Reset password" used to set the password equal to the user's own id,
- *     and ids were sequential and guessable — an account-takeover primitive.
- *     A random temporary password is generated instead, shown once, and the
- *     account is forced to change it at next sign-in.
- *   - Changing the admin's own record used to rewrite the primary key, and a
- *     bug wrote an undefined variable into it, blanking the username and
- *     locking the administrator out permanently.
+ * Password resets issue a random temporary password, shown once, with a forced
+ * change at next sign-in — never anything derived from the account itself.
  */
 
 namespace App;

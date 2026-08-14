@@ -4,9 +4,7 @@
  * no business logic, and no literal English (every string goes through t()).
  *
  * A view is rendered into a layout via output buffering, so there is exactly
- * one <!DOCTYPE>, one <head> and one navbar in the project. The legacy app
- * hand-wrote all three in every one of ~20 files and kept four divergent copies
- * of header.php.
+ * one <!DOCTYPE>, one <head> and one navbar in the project.
  */
 
 namespace App;

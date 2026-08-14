@@ -5,10 +5,7 @@
 --     mysql -u root property_v2 < database/seed.sql
 --
 -- SECURITY: the seeded administrator has must_change_password = 1, so the
--- temporary password below cannot survive first sign-in. This is deliberate —
--- the legacy project shipped a permanent admin/root account and published the
--- credentials in README.md, with the matching bcrypt hash committed in
--- property.sql.
+-- temporary password below cannot survive first sign-in.
 --
 --     Sign in at:  /admin/login
 --     E-mail:      admin@example.com
@@ -40,11 +37,7 @@ ON DUPLICATE KEY UPDATE
 -- The initial administrator.
 --
 -- Admins are ordinary rows in `users` distinguished by role, so more can be
--- created, promoted and demoted from the admin panel. The legacy design had a
--- separate one-row `admin` table whose primary key was the login name, and the
--- only way to "change" the admin was to rename that key — which a bug in
--- admin/action.php did with an undefined variable, blanking the username and
--- locking the administrator out permanently.
+-- created, promoted and demoted from the admin panel.
 -- ---------------------------------------------------------------------------
 INSERT INTO `users`
     (`user_code`, `name`, `email`, `phone`, `password`, `role`, `plan_code`,
