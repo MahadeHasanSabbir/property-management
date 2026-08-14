@@ -1,0 +1,12 @@
+# Uploaded deed documents are private. They are served only through
+# /documents/{id}, which checks ownership first. Nothing here is ever fetched
+# directly, and PHP must never execute here even if a .php file is smuggled in
+# under an allowed extension.
+Require all denied
+
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php7.c>
+    php_flag engine off
+</IfModule>

@@ -1,0 +1,145 @@
+/* ---------------------------------------------------------------------------
+   Property Management — application styles.
+
+   Everything here was previously scattered across ~20 per-file <style> blocks
+   in the legacy pages. Bootstrap 5.3 handles layout; this file only covers
+   what Bootstrap does not.
+   --------------------------------------------------------------------------- */
+
+/* --- Bengali typography ---------------------------------------------------
+   Bootstrap's default font stack does not render Bengali script reliably on
+   Windows, which shows up as tofu boxes rather than text. The Noto Sans
+   Bengali subsets are vendored locally (no CDN), and the stack falls back to
+   Nirmala UI, which ships with Windows.
+   -------------------------------------------------------------------------- */
+
+@font-face {
+    font-family: 'Noto Sans Bengali';
+    font-style: normal;
+    font-weight: 400 700;
+    font-display: swap;
+    src: url('../vendor/noto-bengali/noto-sans-bengali-bengali.woff2') format('woff2');
+    unicode-range: U+0951-0952, U+0964-0965, U+0980-09FE, U+1CD0, U+1CD2,
+                   U+1CD5-1CD6, U+1CD8, U+1CE1, U+1CEA, U+1CED, U+1CF2,
+                   U+1CF5-1CF7, U+200C-200D, U+20B9, U+25CC, U+A8F1;
+}
+
+@font-face {
+    font-family: 'Noto Sans Bengali';
+    font-style: normal;
+    font-weight: 400 700;
+    font-display: swap;
+    src: url('../vendor/noto-bengali/noto-sans-bengali-latin.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+                   U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191,
+                   U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+    --pm-font-bn: 'Noto Sans Bengali', 'Nirmala UI', 'Kalpurush', sans-serif;
+}
+
+:lang(bn),
+html[lang='bn'] body {
+    font-family: var(--pm-font-bn);
+}
+
+/* Record values (deed, dag, khatian numbers) are transcribed from paper and
+   must stay legible and unambiguous regardless of interface language. */
+.record-value {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum';
+}
+
+/* --- Layout ---------------------------------------------------------------- */
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.footer {
+    flex-shrink: 0;
+}
+
+/* --- Tables ---------------------------------------------------------------
+   Record tables are wide (deed, two dag columns, two khatian columns, two
+   owners, area). They must scroll inside their own container rather than
+   making the whole page scroll sideways on a phone.
+   -------------------------------------------------------------------------- */
+
+.table-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table-scroll > .table {
+    margin-bottom: 0;
+}
+
+/* Highlight the dag/khatian token that actually matched a search. */
+mark.token-hit {
+    padding: 0 .15rem;
+    border-radius: .2rem;
+}
+
+/* --- Forms ----------------------------------------------------------------- */
+
+.form-hint {
+    font-size: .8125rem;
+}
+
+/* Comma-separated number inputs read better in a monospaced-ish alignment. */
+input.token-input {
+    font-variant-numeric: tabular-nums;
+}
+
+/* --- Stat tiles ------------------------------------------------------------ */
+
+.stat-tile .stat-value {
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.stat-tile .stat-label {
+    font-size: .8125rem;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+}
+
+/* --- Plan usage meter ------------------------------------------------------ */
+
+.usage-meter {
+    height: .5rem;
+}
+
+/* --- Misc ------------------------------------------------------------------ */
+
+.empty-state {
+    padding: 3rem 1rem;
+    text-align: center;
+}
+
+.empty-state .bi {
+    font-size: 2.5rem;
+    opacity: .35;
+}
+
+/* Active filter chips above search results. */
+.filter-chip {
+    font-size: .8125rem;
+}
+
+@media print {
+    .navbar,
+    .footer,
+    .no-print {
+        display: none !important;
+    }
+}

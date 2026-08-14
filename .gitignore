@@ -1,0 +1,21 @@
+# Local configuration — never commit credentials
+/includes/config.local.php
+
+# Runtime-generated content
+/storage/uploads/*
+!/storage/uploads/.gitkeep
+/storage/logs/*
+!/storage/logs/.gitkeep
+
+# Database dumps and backups
+*.sql.bak
+/database/legacy-backup.sql
+/database/*-backup.sql
+
+# Editor / OS noise
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
+*.swp
+*~

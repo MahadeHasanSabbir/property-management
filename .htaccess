@@ -1,0 +1,65 @@
+# ---------------------------------------------------------------------------
+# Property-Management — front controller and hardening.
+#
+# The app is served from a subdirectory: http://localhost/property-management/
+# Every request that is not a real file is routed to index.php, which dispatches
+# through includes/class.Router.php. No .php extension ever appears in a URL.
+# ---------------------------------------------------------------------------
+
+# httpd.conf enables "Options Indexes" for the whole htdocs tree, which would
+# expose includes/, views/, database/ and storage/ as browsable listings.
+# MultiViews would let /about resolve straight to about.php, bypassing the
+# router and with it every auth and CSRF check.
+Options -Indexes -MultiViews
+
+DirectoryIndex index.php
+
+# mod_dir would 301 /admin to /admin/ the moment a directory of that name
+# exists, shadowing the route of the same name and turning a page load into a
+# redirect. Routes are matched by the front controller, not by the filesystem.
+DirectorySlash Off
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # No RewriteBase. In per-directory context mod_rewrite already strips the
+    # directory prefix before matching and re-adds it to a relative
+    # substitution, so "index.php" resolves to /property-management/index.php.
+    # Hardcoding the folder name here only creates a silent 404 the day the
+    # folder is renamed.
+
+    # 1. Private trees: refuse before anything can execute or be listed.
+    #    [NC] because NTFS is case-insensitive - /INCLUDES/config.php is the
+    #    same file on disk as /includes/config.php.
+    RewriteRule ^(includes|views|database|storage)(/|$) - [F,L,NC]
+
+    # 2. Real files (CSS, JS, fonts, favicon) are served directly by Apache.
+    #    This condition is ALSO the loop terminator for rule 3: after the
+    #    internal rewrite, index.php is a real file, so the re-entrant pass
+    #    stops here. Remove it and Apache returns a 500 "exceeded the limit of
+    #    10 internal redirects".
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^ - [L]
+
+    # 3. Everything else -> front controller. Deliberately no "!-d" condition:
+    #    without it a request for a real directory is routed to index.php and
+    #    404s from PHP, instead of Apache trying to list or serve it.
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "same-origin"
+</IfModule>
+
+# Belt and braces: these must never be fetchable even if the rules above are
+# edited later.
+<FilesMatch "\.(sql|md|log|ini|dist|bak|yml|json)$">
+    Require all denied
+</FilesMatch>
+
+# Never reveal internals to a browser. Errors are logged, not displayed;
+# includes/config.php raises this again at runtime for the PHP-level settings.
+php_flag display_errors off
+php_flag log_errors on

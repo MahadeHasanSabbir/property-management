@@ -1,0 +1,6 @@
+# Second, independent lock on the application source tree. The project-root
+# .htaccess already refuses /includes/, but that rule disappears the moment
+# AllowOverride is tightened or the root file is edited. This one, plus the
+# APP_BOOTSTRAPPED guard at the top of every class file, means no single
+# mistake exposes source or credentials.
+Require all denied

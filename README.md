@@ -1,20 +1,210 @@
-# property-management
-A property management project that help user to manage there property. Registered user can store there property information along with searching those.
+# Property Management
 
-## Style
-Older but most stable version of bootstrap is used for design. The version of bootstrap is 3.3.7
+A record-keeping application for Bangladeshi land deeds — dag (দাগ), khatian (খতিয়ান),
+mouja (মৌজা) and dolil (দলিল) — with search, document attachments, and an
+inheritance-share calculator. English and Bangla throughout.
 
-## Auth
-This folder contain all the file that use for user log-in, log-out and registration
+Built as a small custom MVC application: no framework, no Composer, no build
+step. Drop it in `htdocs`, import the schema, and it runs.
 
-## Profile
-This folder contain all the file that uses in user profile
+---
 
-## Admin
-This folder contain all the file that uses in admin profile
+## Requirements
 
-Default Sing-in for admin profile use this id and password;
+- PHP 8.0+ with `pdo_mysql`, `fileinfo` and `mbstring`
+- MySQL 5.7+ / MariaDB 10.2+
+- Apache with `mod_rewrite` (XAMPP is fine)
 
-<b> ID: </b> admin
+## Installation
 
-<b> Password: </b> root
+```bash
+# 1. Create the schema and seed the first administrator
+mysql -u root < database/schema.sql
+mysql -u root property_v2 < database/seed.sql
+
+# 2. Point a browser at the project
+#    http://localhost/property-management/
+```
+
+There are two sign-in pages, and each links to the other by name:
+
+| Page | Who it is for |
+|---|---|
+| `/login` | Customers — managing their own property records |
+| `/admin/login` | Staff and administrators. Customer accounts are refused here |
+
+Sign in at **`/admin/login`** with `admin@example.com` / `ChangeMe!2026`.
+A password change is forced on first sign-in, and you should change the address
+to one you control — password reset has nowhere to go otherwise.
+
+### If you are locked out
+
+`seed.sql` will not overwrite an existing administrator's password, so re-running
+it does not help. Set a new one directly:
+
+```bash
+# generate a hash for whatever password you want
+php -r "echo password_hash('YourNewPassword', PASSWORD_BCRYPT), PHP_EOL;"
+
+# then, with the hash it printed:
+mysql -u root property_v2 -e "UPDATE users SET password='<paste-hash>', must_change_password=1 WHERE email='admin@example.com';"
+```
+
+Never store a plaintext password in the database — the `password` column holds a
+bcrypt hash and `password_verify()` will simply fail against anything else.
+
+To use different database credentials without touching version control, create
+`includes/config.local.php`:
+
+```php
+<?php
+cfg('DB_USER', 'property_app');
+cfg('DB_PASS', 'your-password');
+cfg('APP_ENV', 'prod');   // hides errors, logs them instead
+```
+
+It is loaded before the defaults and is gitignored.
+
+### Migrating from the old version
+
+The previous release stored each user's records in a **separate MySQL table**
+(`user240225001`, …). To bring that data across:
+
+```bash
+php database/migrate_legacy.php            # dry run — writes nothing
+php database/migrate_legacy.php --commit   # actually migrate
+```
+
+It reads the old `property` database and never modifies it, so the old
+installation keeps working for side-by-side comparison. Every anomaly it finds
+is recorded rather than fatal:
+
+```sql
+SELECT * FROM migration_report ORDER BY id;
+```
+
+Re-running is a no-op, so it is safe to fix a flagged row and run it again.
+Because sign-in is now by e-mail, a user with a missing or duplicate address is
+skipped and reported rather than guessed at.
+
+---
+
+## Layout
+
+```
+.htaccess          front controller rewrite + hardening
+index.php          the only web-reachable PHP file
+includes/          all classes, config and shared code (deny-all .htaccess)
+  lang/            en.php · bn.php
+views/             templates only — no SQL, no literal English
+resources/         css/ js/ vendor/{bootstrap, bootstrap-icons, noto-bengali}
+storage/           uploads/ and logs/ (deny-all .htaccess, PHP engine off)
+database/          schema.sql · seed.sql · migrate_legacy.php · reindex.php
+```
+
+Classes are flat in `includes/` as `class.Name.php` under the `App\` namespace,
+autoloaded by `includes/bootstrap.php`. Adding a class means creating the file —
+there is nothing to register.
+
+**Routing.** Every request that is not a real file goes to `index.php`, which
+dispatches through `includes/routes.php`. No URL carries a `.php` extension.
+Record ids are path segments (`/properties/12/edit`); filters travel as one
+encoded `?q=` token built by `url()`.
+
+> The `?q=` token is **presentation, not security**. It is base64url and anyone
+> can decode it, and because it expands into `$_GET` a visitor can craft any
+> values they like. Ownership checks, CSRF tokens, bound parameters and
+> `ORDER BY` whitelisting are what actually protect the app.
+
+**Adding a page.** Write a controller method, add a line to `routes.php` naming
+its access rule, and add the view. Access rules (`guest`, `auth`, `customer`,
+`staff`, `admin`) live in `includes/class.Middleware.php` — never inside a
+controller.
+
+---
+
+## Roles and plans
+
+Two independent axes:
+
+- **Role** (`users.role`) decides what you may do: `customer`, `staff`, `admin`.
+  The role → permission map is a constant in `includes/class.Permission.php`;
+  checks read `Auth::can('user.delete')`.
+- **Plan** (`users.plan_code` → `plans`) decides how much: record limit, whether
+  document upload and CSV export are included.
+
+Plan limits are **data, not code** — edit them at `/admin/plans`. A blank limit
+means unlimited, and `users.property_limit_override` raises the ceiling for one
+account without inventing a new plan.
+
+Going over a limit makes an account **read-only, not broken**: creating new
+records is blocked while viewing, editing and deleting still work, so the
+account can be brought back under the limit.
+
+---
+
+## Search
+
+Dag and khatian numbers are entered as comma-separated lists and stored exactly
+as typed. `property_identifiers` holds the same values split into rows, and
+search matches whole tokens against that index.
+
+That table is **derived and rebuildable**:
+
+```bash
+php database/reindex.php
+```
+
+The raw strings are canonical, so a bug in the splitter can be fixed and the
+index regenerated without any user data having been lost.
+
+Filters combine with AND by default (choose "any filter" to widen), dag and
+khatian match current *or* previous unless narrowed, and owner search matches
+by prefix (a slower "contains" mode is offered explicitly).
+
+---
+
+## Localization
+
+`includes/lang/en.php` and `bn.php`. Views call `t('key')` or `te('key')` (the
+escaping form) and contain no literal English; a missing Bangla key falls back
+to English rather than rendering blank.
+
+Noto Sans Bengali is vendored in `resources/vendor/noto-bengali/` — Bootstrap's
+default font stack renders Bengali as empty boxes on Windows without it.
+
+Record **values** — deed, dag and khatian numbers — always display in Latin
+digits, because they must match the paper document exactly.
+
+---
+
+## Development notes
+
+- Set `APP_ENV` to `dev` for on-screen errors, `prod` to log them instead.
+- Outgoing mail defaults to a log driver, writing to `storage/logs/mail.log`.
+  XAMPP has no working mail path, so a real `mail()` call would fail silently
+  and password reset would appear to work while sending nothing. Set
+  `cfg('MAIL_DRIVER', 'mail')` once a mail path exists.
+- Uploads are validated by content (`finfo`), stored under a random name with a
+  `.bin` extension, and served only through `/documents/{id}` after an ownership
+  check. `gd` and `intl` are not required.
+- Every state-changing route is POST and CSRF-verified centrally in `index.php`;
+  no controller can forget.
+
+## Security
+
+If you are upgrading, note that the following are fixed here and were live
+problems in the previous version: SQL injection on the sign-in page, missing
+output escaping everywhere, no CSRF protection with account deletion on a bare
+`GET`, a logout that did not end the session, no session-id regeneration, no
+login throttling, an admin password reset that set the password to the user's
+own (sequential) id, and database credentials hardcoded in 29 files.
+
+Before putting this on a network:
+
+1. Change the seeded administrator's e-mail and password.
+2. Create a dedicated MySQL user with `SELECT, INSERT, UPDATE, DELETE` on
+   `property_v2` only — the application never issues DDL — and put it in
+   `includes/config.local.php`.
+3. Set `APP_ENV` to `prod`.
+4. Serve over HTTPS; the session cookie then sets `Secure` automatically.
